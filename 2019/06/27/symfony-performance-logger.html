@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Symfony Performance Logger</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="icon" href="/assets/css/favicon.png" type="image/png">
+</head>
+
+<body>
+  <div class="container">
+    <div class="markdown-body m-b m-t">
+      <h3 id="performance-logger-on-producation-">Performance Logger ON Producation !</h3>
+
+<p><code class="highlighter-rouge">Doctrine</code> already ships with an awesome logger. Symfony enables that logger on dev mode the doctrine tab that we see on the profile comes from logger itself Symfony just display it.</p>
+
+<h4 id="how-to-use-the-logger-on-production">How to use the logger on production?</h4>
+
+<ul>
+  <li>
+    <p>We should set the profiling option to enable <code class="highlighter-rouge">Doctrine\DBAL\Logging\DebugStack</code></p>
+  </li>
+  <li>
+    <p>After <code class="highlighter-rouge">kernel.terminate</code> event fired we can use <code class="highlighter-rouge">DebugStack</code>.</p>
+  </li>
+</ul>
+
+<p>Here’s a PerformanceLog.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+
+<span class="k">namespace</span> <span class="nx">Aqarmap\Bundle\MainBundle\EventListener</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Aqarmap\Bundle\MainBundle\Document\PerformanceLog</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Doctrine\DBAL\Logging\DebugStack</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Doctrine\ODM\MongoDB\DocumentManager</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">JMS\DiExtraBundle\Annotation</span> <span class="k">as</span> <span class="nx">DI</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\Event\PostResponseEvent</span><span class="p">;</span>
+
+<span class="sd">/**
+ * @DI\Service("aqarmap.performance.listener")
+ * @DI\Tag("kernel.event_listener", attributes = {
+ *  "event"="kernel.terminate",
+ *  "method"="handel"
+ * })
+ */</span>
+
+<span class="k">final</span> <span class="k">class</span> <span class="nc">PerformanceListener</span>
+<span class="p">{</span>
+    <span class="sd">/**
+     *
+     * @var DebugStack
+     */</span>
+    <span class="k">private</span> <span class="nv">$debugStack</span><span class="p">;</span>
+
+    <span class="sd">/**
+     *
+     * @var DocumentManager
+     */</span>
+    <span class="k">private</span> <span class="nv">$documentManager</span><span class="p">;</span>
+
+    <span class="sd">/**
+     *
+     * @var array
+     */</span>
+    <span class="k">private</span> <span class="nv">$config</span><span class="p">;</span>
+
+    <span class="sd">/**
+     * @DI\InjectParams({
+     *      "debugStack" = @DI\Inject("doctrine.dbal.logger.profiling.default"),
+     *      "documentManager" = @DI\Inject("doctrine_mongodb.odm.default_document_manager"),
+     *      "config" = @DI\Inject("%agarmap.performance_log%")
+     * })
+     *
+     * @param DebugStack $debugStack
+     * @param DocumentManager $documentManager
+     * @param array $config
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">(</span><span class="nx">DebugStack</span> <span class="nv">$debugStack</span><span class="p">,</span> <span class="nx">DocumentManager</span> <span class="nv">$documentManager</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$config</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">debugStack</span> <span class="o">=</span> <span class="nv">$debugStack</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">documentManager</span> <span class="o">=</span> <span class="nv">$documentManager</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">config</span> <span class="o">=</span> <span class="nv">$config</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**
+     *
+     * @param PostResponseEvent $event
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">handel</span><span class="p">(</span><span class="nx">PostResponseEvent</span> <span class="nv">$event</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">config</span><span class="p">[</span><span class="s1">'enabled'</span><span class="p">])</span> <span class="p">{</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="nv">$queries</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">debugStack</span><span class="o">-&gt;</span><span class="na">queries</span><span class="p">;</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getRequest</span><span class="p">();</span>
+        <span class="nv">$log</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PerformanceLog</span><span class="p">();</span>
+
+        <span class="nv">$log</span><span class="o">-&gt;</span><span class="na">setQueryTotalExecuationTime</span><span class="p">(</span><span class="nb">number_format</span><span class="p">(</span><span class="nb">array_sum</span><span class="p">(</span><span class="nb">array_column</span><span class="p">(</span><span class="nv">$queries</span><span class="p">,</span> <span class="s1">'executionMS'</span><span class="p">))</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">2</span><span class="p">));</span>
+        <span class="nv">$log</span><span class="o">-&gt;</span><span class="na">setAction</span><span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'_controller'</span><span class="p">));</span>
+        <span class="nv">$log</span><span class="o">-&gt;</span><span class="na">setUrl</span><span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getSchemeAndHttpHost</span><span class="p">()</span> <span class="o">.</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getRequestUri</span><span class="p">());</span>
+        <span class="nv">$log</span><span class="o">-&gt;</span><span class="na">setQueryTotalCount</span><span class="p">(</span><span class="nb">count</span><span class="p">(</span><span class="nv">$queries</span><span class="p">));</span>
+        <span class="nv">$log</span><span class="o">-&gt;</span><span class="na">setCreatedAt</span><span class="p">(</span><span class="k">new</span> <span class="nx">\Datetime</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">documentManager</span><span class="o">-&gt;</span><span class="na">persist</span><span class="p">(</span><span class="nv">$log</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">documentManager</span><span class="o">-&gt;</span><span class="na">flush</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Now we have a performance logger that can help us to measure queries and we can also add more and more like for example HTML rendering time, Code execution time and so one</p>
+
+<p>I’ve made it totally stand alone in order to remove it later as microservice.</p>
+
+<p>After the next release, we can start to get our hands dirty.</p>
+
+    </div>
+    <div class="nav m-b">
+      
+      <a class="" href="/2019/06/02/problem-solving.html">&laquo; Sorting Issues</a>
+      
+      <a class="" href="/">Home</a>
+      
+    </div>
+  </div>
+</body>
+
+</html>

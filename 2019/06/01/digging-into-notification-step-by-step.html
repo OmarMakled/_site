@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Symfony Notification Part2</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="icon" href="/assets/css/favicon.png" type="image/png">
+</head>
+
+<body>
+  <div class="container">
+    <div class="markdown-body m-b m-t">
+      <h1 id="digging-into-notification-step-by-step">Digging into notification step by step:</h1>
+
+<ul>
+  <li>How to create new notification and set channels?</li>
+  <li>How to define message?</li>
+  <li>How to send notification?</li>
+  <li>How to set target user or users?</li>
+  <li>How to test on Webview?</li>
+</ul>
+
+<h2 id="how-to-create-new-notification-and-set-channels">How to create new notification and set channels?</h2>
+
+<p>Let’s take an example
+Go to <code class="highlighter-rouge">Aqarmap\Bundle\MainBundle\Notifications\Types\ListingWasPublished</code>
+You will find public <code class="highlighter-rouge">$config</code> property it tells <code class="highlighter-rouge">NotificationManager</code> about config type.</p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sd">/**
+* Point to config type
+*
+* @var \Aqarmap\NotificationBundle\Config\ConfigInterface
+*/</span>
+<span class="k">public</span> <span class="nv">$config</span> <span class="o">=</span> <span class="nx">\Aqarmap\NotificationBundle\Config\YmlConfig</span><span class="o">::</span><span class="na">class</span><span class="p">;</span>
+</code></pre></div></div>
+<p>Inside <code class="highlighter-rouge">src/Aqarmap/Bundle/MainBundle/Notifications/Types/config.yml</code></p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Notifications</span><span class="o">:</span>
+    <span class="nx">ListingWasPublished</span><span class="o">:</span>
+        <span class="k">class</span><span class="err">:</span> <span class="nc">Aqarmap\Bundle\MainBundle\Notifications\Types\ListingWasPublished</span>
+        <span class="nx">channel</span><span class="o">:</span> <span class="p">[</span><span class="nx">Database</span><span class="p">,</span> <span class="nx">Mail</span><span class="p">,</span> <span class="nx">HTML</span><span class="p">]</span>
+        <span class="nx">queue</span><span class="o">:</span> <span class="p">[]</span>
+</code></pre></div></div>
+<p>Here is we define channels if you need to run any channle <code class="highlighter-rouge">async</code> simply define channel inside queue</p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Notifications</span><span class="o">:</span>
+    <span class="nx">ListingWasPublished</span><span class="o">:</span>
+        <span class="k">class</span><span class="err">:</span> <span class="nc">Aqarmap\Bundle\MainBundle\Notifications\Types\ListingWasPublished</span>
+        <span class="nx">channel</span><span class="o">:</span> <span class="p">[</span><span class="nx">Database</span><span class="p">,</span> <span class="nx">Mail</span><span class="p">,</span> <span class="nx">HTML</span><span class="p">]</span>
+        <span class="nx">queue</span><span class="o">:</span> <span class="p">[</span><span class="nx">Mail</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h2 id="how-to-define-message">How to define message?</h2>
+
+<p><code class="highlighter-rouge">NotificationManager</code> are looking for function prefix with <code class="highlighter-rouge">by</code> and name of channel such as <code class="highlighter-rouge">byDatabase</code> <code class="highlighter-rouge">byHTML</code></p>
+
+<p>Of Course You can create simple function and return message</p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sd">/**
+* Define the message via Database channel
+*
+* @return string
+*/</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">byDatabase</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="s1">'this message will show in webview when listing was published'</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>But in our project we need to create rich message, so we use twig to render message instead of simple text.</p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sd">/**
+    * Define the message via Database channel
+    *
+    * @return string
+    */</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">byDatabase</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">twig</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span>
+        <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">'/views/dataBase/listing_was_published.twig'</span><span class="p">,</span>
+        <span class="p">[</span><span class="s1">'subject'</span> <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">subject</span><span class="p">]</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>as long as sending via mail and database is most common we created abstract <code class="highlighter-rouge">Notification</code> class following naming convention to return appropriate template</p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sd">/**
+* Convert class name to underscore
+*
+* @return string
+*/</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">template</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="nv">$class</span> <span class="o">=</span> <span class="p">(</span><span class="k">new</span> <span class="nx">ReflectionClass</span><span class="p">(</span><span class="nv">$this</span><span class="p">))</span><span class="o">-&gt;</span><span class="na">getShortName</span><span class="p">();</span>
+    <span class="nv">$template</span> <span class="o">=</span>  <span class="nb">strtolower</span><span class="p">(</span><span class="nb">preg_replace</span><span class="p">(</span><span class="s1">'~(?&lt;=\\w)([A-Z])~'</span><span class="p">,</span> <span class="s1">'_$1'</span><span class="p">,</span> <span class="nv">$class</span><span class="p">));</span>
+
+    <span class="k">return</span> <span class="nv">$template</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="sd">/**
+* Define the message via Database channel
+*
+* @return string
+*/</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">byDatabase</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">twig</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span>
+        <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">'/views/dataBase/'</span><span class="o">.</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">template</span><span class="p">()</span><span class="o">.</span><span class="s1">'.php.twig'</span><span class="p">,</span>
+        <span class="p">[</span><span class="s1">'subject'</span> <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">subject</span><span class="p">]</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="how-to-send-notification">How to send notification?</h2>
+
+<p><code class="highlighter-rouge">NotificationManager</code> is define inside IOC Continer that means you can simply inside controller get new instance.</p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$manager</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'notification_manager'</span><span class="p">);</span>
+<span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">(</span><span class="nv">$user</span><span class="p">,</span> <span class="k">new</span> <span class="nx">LisitingWasPublished</span><span class="p">);</span>
+</code></pre></div></div>
+<p>But in many cases you might need to write some extra behaviours before sending notifications and to avoid massive controller We uses events.</p>
+
+<p>For example when listing was published</p>
+
+<p>Inside <code class="highlighter-rouge">Aqarmap\Bundle\ListingBundle\Service\ListingManager:309</code> we fire <code class="highlighter-rouge">listing.was.published</code> event.</p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">dispatcher</span><span class="o">-&gt;</span><span class="na">dispatch</span><span class="p">(</span><span class="s1">'listing.was.published'</span><span class="p">,</span> <span class="k">new</span> <span class="nx">Listing</span><span class="p">(</span><span class="nv">$listing</span><span class="p">));</span>
+</code></pre></div></div>
+<p>Inside <code class="highlighter-rouge">Aqarmap\Bundle\MainBundle\Notifications\NotificationSubscriber</code></p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sd">/**
+* Register the listeners for the subscriber.
+*/</span>
+<span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">getSubScribedEvents</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="s1">'listing.was.published'</span> <span class="o">=&gt;</span> <span class="s1">'onListingWasPublished'</span><span class="p">,</span>
+        <span class="s1">'listing.was.rejected'</span> <span class="o">=&gt;</span> <span class="s1">'onListingWasRejected'</span><span class="p">,</span>
+        <span class="s1">'discussion.was.approval'</span> <span class="o">=&gt;</span> <span class="s1">'onDiscussionWasApproval'</span><span class="p">,</span>
+        <span class="s1">'discussion.was.rejected'</span> <span class="o">=&gt;</span> <span class="s1">'onDiscussionWasRejected'</span><span class="p">,</span>
+        <span class="o">...</span>
+    <span class="p">];</span>
+<span class="p">}</span>
+
+<span class="sd">/**
+* Send notification when listing was published
+*
+* @param  \Aqarmap\Bundle\MainBundle\Notifications\Events\NotificationEvent $event
+*
+* @return void
+*/</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">onListingWasPublished</span><span class="p">(</span><span class="nx">NotificationEvent</span> <span class="nv">$event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">(</span><span class="k">new</span> <span class="nx">ListingWasPublished</span><span class="p">,</span> <span class="nv">$event</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>We are planning to use different approach by using subscriber to avoid rabbits inside controller “for lack of the better word”, but now first things first</p>
+
+<h2 id="how-to-set-target-user-or-users">How to set target user or users?</h2>
+
+<p>We use events to</p>
+
+<ul>
+  <li>avoid massive controller</li>
+  <li>preparation before sending notification</li>
+</ul>
+
+<p>Inside event we set user or users who will get noitification</p>
+
+<p><code class="highlighter-rouge">Aqarmap\Bundle\MainBundle\Notifications\Events\Listing</code></p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sd">/**
+* Get user instance
+*
+* @return \Aqarmap\Bundle\UserBundle\Entity\User
+*/</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">getUser</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">listing</span><span class="o">-&gt;</span><span class="na">getUser</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="how-to-test-on-webview">How to test on Webview?</h2>
+<p>got to <code class="highlighter-rouge">/notifications/test</code></p>
+
+<p><img src="https://user-images.githubusercontent.com/3720473/32836108-6224e222-ca11-11e7-98d6-33f151863941.gif" alt="nov-14-2017 03-04-00" /></p>
+
+    </div>
+    <div class="nav m-b">
+      
+      <a class="" href="/">Home</a>
+      
+      <a class="" href="/2019/06/01/symfony-notification-walking-skeleton.html">Symfony Notification Part1 &raquo;</a>
+      
+    </div>
+  </div>
+</body>
+
+</html>

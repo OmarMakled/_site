@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sorting Issues</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="icon" href="/assets/css/favicon.png" type="image/png">
+</head>
+
+<body>
+  <div class="container">
+    <div class="markdown-body m-b m-t">
+      <p>As long as this issue one of the highest and oldest one let me describe it in details.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Sorting</th>
+      <th>View ES</th>
+      <th>Api ES</th>
+      <th>View MySql</th>
+      <th>Api MySql</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Price asc</td>
+      <td>✓</td>
+      <td>✓</td>
+      <td>✓</td>
+      <td>✓</td>
+    </tr>
+    <tr>
+      <td>Price desc</td>
+      <td>✓</td>
+      <td>✗</td>
+      <td>✓</td>
+      <td>✓</td>
+    </tr>
+    <tr>
+      <td>Area asc</td>
+      <td>✓</td>
+      <td>✓</td>
+      <td>✓</td>
+      <td>✓</td>
+    </tr>
+    <tr>
+      <td>Area desc</td>
+      <td>✓</td>
+      <td>✗</td>
+      <td>✓</td>
+      <td>✓</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>​As we notice issue with <code class="highlighter-rouge">desc</code> something really weird a little bit after digging into code for a good bit of time I catch the error here it is.</p>
+
+<p><code class="highlighter-rouge">FOS\ElasticaBundle\Subscriber\PaginateElasticaQuerySubscriber@getSortDirection</code>​</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">protected</span> <span class="k">function</span> <span class="nf">getSortDirection</span><span class="p">(</span><span class="nv">$sortField</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$options</span> <span class="o">=</span> <span class="p">[])</span>
+<span class="p">{</span>
+    <span class="nv">$dir</span> <span class="o">=</span> <span class="s1">'asc'</span><span class="p">;</span>
+    <span class="nv">$sortDirection</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getRequest</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nv">$options</span><span class="p">[</span><span class="s1">'sortDirectionParameterName'</span><span class="p">]);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="k">empty</span><span class="p">(</span><span class="nv">$sortDirection</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nb">isset</span><span class="p">(</span><span class="nv">$options</span><span class="p">[</span><span class="s1">'defaultSortDirection'</span><span class="p">]))</span> <span class="p">{</span>
+        <span class="nv">$sortDirection</span> <span class="o">=</span> <span class="nv">$options</span><span class="p">[</span><span class="s1">'defaultSortDirection'</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>It redefines Sort depending on query string searching for parameter with name as we define in config in or case <code class="highlighter-rouge">direction</code> <strong>api request passes <code class="highlighter-rouge">&amp;orderDirection=</code> instead of <code class="highlighter-rouge">&amp;direction=</code></strong> so it reset direction to the default one <code class="highlighter-rouge">asc</code>.</p>
+
+<p>We could fix that issues simply by just adding parameter with name <code class="highlighter-rouge">direction</code> :)</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// VERY IMPORTANT</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">query</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span>
+    <span class="s1">'direction'</span><span class="p">,</span>
+    <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">query</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'orderDirection'</span><span class="p">)</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+    </div>
+    <div class="nav m-b">
+      
+      <a class="" href="/2019/06/01/symfony-notification-walking-skeleton.html">&laquo; Symfony Notification Part1</a>
+      
+      <a class="" href="/">Home</a>
+      
+      <a class="" href="/2019/06/27/symfony-performance-logger.html">Symfony Performance Logger &raquo;</a>
+      
+    </div>
+  </div>
+</body>
+
+</html>

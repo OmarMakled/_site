@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Symfony Notification Part1</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="icon" href="/assets/css/favicon.png" type="image/png">
+</head>
+
+<body>
+  <div class="container">
+    <div class="markdown-body m-b m-t">
+      <h3 id="create-notification">Create Notification</h3>
+
+<p>We serve as a great way to decouple various aspect of notification and channels since each one of them is a detached class which provides a low coupling for reliable, scalable, and maintainable system.</p>
+
+<p>You can manually creating new Notifcation or via command that will generat boilerplate.</p>
+
+<p>For example <code class="highlighter-rouge">aqarmap make:notification NewListing</code> it will generate NewListing notification with boilerplate inside <code class="highlighter-rouge">Aqarmap\NotificationBundle\Notifications</code>.</p>
+
+<p>After creating notification class you can define configration via configration file.</p>
+
+<p><code class="highlighter-rouge">notifications.yml</code></p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">NewListing</span><span class="o">:</span>
+    <span class="k">class</span><span class="err">:</span> <span class="nc">Aqarmap\NotificationBundle\Notifications\NewListing</span>
+    <span class="nx">channel</span><span class="o">:</span> <span class="p">[</span><span class="s1">'sms'</span><span class="p">,</span> <span class="s1">'database'</span><span class="p">,</span> <span class="s1">'mail'</span><span class="p">]</span>
+    <span class="nx">queue</span><span class="o">:</span> <span class="p">[</span><span class="s1">'sms'</span><span class="p">,</span> <span class="s1">'database'</span><span class="p">,</span> <span class="s1">'mail'</span><span class="p">]</span>
+</code></pre></div></div>
+<p>Or inside class.
+<code class="highlighter-rouge">NewListing.php</code></p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sd">/**
+* List of channels
+*
+* @var array
+*/</span>
+<span class="k">public</span> <span class="nv">$channel</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'database'</span><span class="p">];</span>
+
+<span class="sd">/**
+* List of queues
+*
+* @var array
+*/</span>
+<span class="k">public</span> <span class="nv">$queue</span> <span class="o">=</span> <span class="p">[];</span>
+</code></pre></div></div>
+
+<p>We also provides a simple queue implementation, allowing you to asynchronous sending for particular channel by define queue for example</p>
+
+<p><code class="highlighter-rouge">notifications.yml</code></p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">NewListing</span><span class="o">:</span>
+    <span class="k">class</span><span class="err">:</span> <span class="nc">Aqarmap\NotificationBundle\Notifications\NewListing</span>
+    <span class="nx">channel</span><span class="o">:</span> <span class="p">[</span><span class="s1">'sms'</span><span class="p">,</span> <span class="s1">'database'</span><span class="p">,</span> <span class="s1">'mail'</span><span class="p">]</span>
+    <span class="nx">queue</span><span class="o">:</span> <span class="p">[</span><span class="s1">'mail'</span><span class="p">]</span>
+</code></pre></div></div>
+<p>Or inside class <code class="highlighter-rouge">NewListing.php</code></p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sd">/**
+* List of queues
+*
+* @var array
+*/</span>
+<span class="k">public</span> <span class="nv">$queue</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'mail'</span><span class="p">];</span>
+</code></pre></div></div>
+<p>by default notification will send <code class="highlighter-rouge">synchronize</code> here’s we defiend <code class="highlighter-rouge">mail</code> to be <code class="highlighter-rouge">asynchronous</code></p>
+
+<h3 id="create-channel">Create Channel</h3>
+
+<p>Since each channel is a detached we provides out of the box <code class="highlighter-rouge">Mail</code> and <code class="highlighter-rouge">DataBase</code>channels you can add more channels such as telegram, facebook, twitter and so on.
+all channels is stored in <code class="highlighter-rouge">Aqarmap\NotificationBundle\Channels</code> namespace.</p>
+
+<h3 id="dispatch-notification">Dispatch Notification</h3>
+
+<p>To dispatch a notification simple by running</p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$manager</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ChannelManager</span><span class="p">();</span>
+<span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">(</span><span class="nv">$users</span><span class="p">,</span> <span class="nv">$notification</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Where <code class="highlighter-rouge">ChannelManager</code> is a factory or builder that build appropriate driver for each channel if driver not found it will throw <code class="highlighter-rouge">DriverNotFoundException</code> where sending Notification It is done through <code class="highlighter-rouge">NotifictionSender</code></p>
+
+<p>That’s a quick intro for notification system. Happy coding!</p>
+
+<h3 id="testing">Testing</h3>
+
+<p>I’ve build notification bundle with testing in mind, the bundle ships with eloquent testing.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
+* This file is part of Moonshot Project 2017.
+*
+* @author Omar Makled &lt;omar.makled@aqarmap.com&gt;
+*/</span>
+<span class="k">namespace</span> <span class="nx">Aqarmap\NotificationBundle\Tests</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Mockery</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Aqarmap\NotificationBundle\NotificationConfig</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Aqarmap\NotificationBundle\ChannelManager</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Aqarmap\NotificationBundle\NotificationSender</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Aqarmap\NotificationBundle\Tests\Notification</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Bundle\FrameworkBundle\Test\WebTestCase</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Aqarmap\NotificationBundle\Exceptions\DriverNotFoundException</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Aqarmap\NotificationBundle\Exceptions\NotificationConfigException</span><span class="p">;</span>
+<span class="k">class</span> <span class="nc">ChannelManagerTest</span> <span class="k">extends</span> <span class="nx">WebTestCase</span>
+<span class="p">{</span>
+    <span class="k">protected</span> <span class="nv">$manager</span><span class="p">;</span>
+    <span class="k">protected</span> <span class="nv">$notification</span><span class="p">;</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">tearDown</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nx">Mockery</span><span class="o">::</span><span class="na">close</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">setUp</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nx">self</span><span class="o">::</span><span class="na">bootKernel</span><span class="p">();</span>
+        <span class="nv">$app</span> <span class="o">=</span> <span class="k">static</span><span class="o">::</span><span class="nv">$kernel</span><span class="o">-&gt;</span><span class="na">getContainer</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">manager</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ChannelManager</span><span class="p">(</span><span class="nv">$app</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">notification</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Notification</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testDriverNotFoundException</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">expectException</span><span class="p">(</span><span class="nx">DriverNotFoundException</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">expectExceptionMessage</span><span class="p">(</span><span class="s2">"We don't support foo Driver"</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">manager</span><span class="o">-&gt;</span><span class="na">driver</span><span class="p">(</span><span class="s1">'foo'</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testNotificationConfigException</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">expectException</span><span class="p">(</span><span class="nx">NotificationConfigException</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">expectExceptionMessage</span><span class="p">(</span><span class="s2">"We can't find config foo"</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">notification</span><span class="o">-&gt;</span><span class="na">channel</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'sms'</span><span class="p">,</span> <span class="s1">'database'</span><span class="p">,</span> <span class="s1">'mail'</span><span class="p">];</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">notification</span><span class="o">-&gt;</span><span class="na">queue</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'mail'</span><span class="p">];</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">manager</span><span class="o">-&gt;</span><span class="na">getConfig</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">notification</span><span class="p">,</span> <span class="s1">'foo'</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testGetConfigProperty</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">notification</span><span class="o">-&gt;</span><span class="na">channel</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'sms'</span><span class="p">,</span> <span class="s1">'database'</span><span class="p">,</span> <span class="s1">'mail'</span><span class="p">];</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">notification</span><span class="o">-&gt;</span><span class="na">queue</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'mail'</span><span class="p">];</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span>
+            <span class="p">[</span><span class="s1">'sms'</span><span class="p">,</span> <span class="s1">'database'</span><span class="p">,</span> <span class="s1">'mail'</span><span class="p">],</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">manager</span><span class="o">-&gt;</span><span class="na">getConfig</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">notification</span><span class="p">,</span> <span class="s1">'channel'</span><span class="p">)</span>
+        <span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span>
+            <span class="p">[</span><span class="s1">'mail'</span><span class="p">],</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">manager</span><span class="o">-&gt;</span><span class="na">getConfig</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">notification</span><span class="p">,</span> <span class="s1">'queue'</span><span class="p">)</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testGetConfigFile</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$config</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">manager</span><span class="o">-&gt;</span><span class="na">getConfig</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">notification</span><span class="p">,</span> <span class="s1">'channel'</span><span class="p">,</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">'/config.yml'</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">([</span><span class="s1">'sms'</span><span class="p">,</span> <span class="s1">'database'</span><span class="p">,</span> <span class="s1">'mail'</span><span class="p">],</span> <span class="nv">$config</span><span class="p">);</span>
+        <span class="nv">$config</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">manager</span><span class="o">-&gt;</span><span class="na">getConfig</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">notification</span><span class="p">,</span> <span class="s1">'queue'</span><span class="p">,</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">'/config.yml'</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">([</span><span class="s1">'sms'</span><span class="p">,</span> <span class="s1">'database'</span><span class="p">,</span> <span class="s1">'mail'</span><span class="p">],</span> <span class="nv">$config</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+    </div>
+    <div class="nav m-b">
+      
+      <a class="" href="/2019/06/01/digging-into-notification-step-by-step.html">&laquo; Symfony Notification Part2</a>
+      
+      <a class="" href="/">Home</a>
+      
+      <a class="" href="/2019/06/02/problem-solving.html">Sorting Issues &raquo;</a>
+      
+    </div>
+  </div>
+</body>
+
+</html>
