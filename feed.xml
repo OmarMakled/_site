@@ -1,4 +1,266 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2019-06-27T11:29:36-05:00</updated><id>/feed.xml</id><title type="html">Omar Makled</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Symfony Performance Logger</title><link href="/2019/06/27/symfony-performance-logger.html" rel="alternate" type="text/html" title="Symfony Performance Logger" /><published>2019-06-27T00:00:00-05:00</published><updated>2019-06-27T00:00:00-05:00</updated><id>/2019/06/27/symfony-performance-logger</id><content type="html" xml:base="/2019/06/27/symfony-performance-logger.html">&lt;h3 id=&quot;performance-logger-on-producation-&quot;&gt;Performance Logger ON Producation !&lt;/h3&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2019-07-01T04:27:32-05:00</updated><id>/feed.xml</id><title type="html">Omar Makled</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Testing Microservices</title><link href="/2019/07/01/testing-microservices.html" rel="alternate" type="text/html" title="Testing Microservices" /><published>2019-07-01T00:00:00-05:00</published><updated>2019-07-01T00:00:00-05:00</updated><id>/2019/07/01/testing-microservices</id><content type="html" xml:base="/2019/07/01/testing-microservices.html">&lt;p&gt;A microservice architecture involves many moving parts with different guarantees
+and failure modes, testing these systems is more challenging than testing
+traditional monolithic application. an effective test strategy needs to account
+for testing individual services in isolation and the verification of overall
+system behaviour.&lt;/p&gt;
+
+&lt;h3 id=&quot;what-are-microservices&quot;&gt;What are microservices?&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/1600/0*35CIX00OXWaVH57g.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;There are two basic software development styles, first and most common style is
+monolithic Application, it is called monolith because it consists of a single
+application contained in a single process.&lt;/p&gt;
+
+&lt;p&gt;The microservices architectural style in the other hand involves developing
+single applications that can work together with a suite of small autonomous
+services, each running in its individual process and communicating using
+lightweight mechanisms such as HTTP resource API. These services can be written
+in different programming language and different data storage technologies, and
+each of them can be deployed and scaled independently.&lt;/p&gt;
+
+&lt;h3 id=&quot;why-do-we-test&quot;&gt;Why do we test?&lt;/h3&gt;
+
+&lt;p&gt;Do we ?! To code with confident like that, We need to write tests that verify
+our code is running in a proper way, writing tests make code maintenance much
+easier because you have what assure that your maintenance for one part won’t
+affect other parts in a wrong way, also writing tests can provide us feedback
+about the system if it is working properly in a fast, accurate way while you can
+do this in a manual way, it will never be as accurate, fast as the automated
+test cases.&lt;/p&gt;
+
+&lt;p&gt;Writing tests can give you detailed feedback about our code, automated coverage
+report can tell us if the code is tested enough or not and which cases you
+forget to test it.&lt;/p&gt;
+
+&lt;h3 id=&quot;different-type-of-testing-strategies&quot;&gt;Different type of testing strategies&lt;/h3&gt;
+
+&lt;p&gt;In microservice architecture, your system is built as suites of collaborating
+services.&lt;/p&gt;
+
+&lt;p&gt;To verify that services work together in a harmony we had to write different
+types of test strategies starting from basic unit tests that exercises the
+smallest piece of testable software in the application to determine whether it
+behaves as expected, to the End to End testing which verifies that a system
+meets the external requirements and achieve its goals.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/1600/0*L7uyy4tWZ_LK9LIC.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;the test pyramid helps us to identify different types of tests and when to use
+each of them.&lt;/p&gt;
+
+&lt;p&gt;We use those different test strategies except the last one the exploratory,
+which basically an automated regression testing that runs across the whole
+system, but we hope to reach this level soon.&lt;/p&gt;
+
+&lt;p&gt;let’s go bottom up throw those strategies one by one.&lt;/p&gt;
+
+&lt;p&gt;Our Microservices usually contains different smaller modules (Repositories,
+Service layer, Resources, Gateway, ORM. etc)&lt;/p&gt;
+
+&lt;p&gt;each module should have it’s independent &lt;strong&gt;unit tests&lt;/strong&gt; that are verifying that
+module working in a proper way independently.&lt;/p&gt;
+
+&lt;h3 id=&quot;but-why-unit-tests-are-not-enough&quot;&gt;But why unit tests are not enough?&lt;/h3&gt;
+
+&lt;p&gt;In microservice case unit tests alone is not enough because in our opinion it
+doesn’t cover the whole system behaviours, as we said by unit tests we provide
+good coverage of each core module of the microservice independently but there’s
+no coverage for those modules when the work together as a system or as a
+service, To verify that each module correctly interacts with its collaborators,
+more testing is required.&lt;/p&gt;
+
+&lt;h3 id=&quot;integration-testing&quot;&gt;Integration testing&lt;/h3&gt;
+
+&lt;p&gt;Integration testing is a testing strategy that we need to verify the interaction
+between various microservice components and detect interface defects.&lt;/p&gt;
+
+&lt;p&gt;Integration testing collects modules together and tests them as a subsystem to
+verify that they collaborate as they intended to achieve some larger piece of
+interactions.&lt;/p&gt;
+
+&lt;p&gt;Also, it verifies that the communication paths between the system to check how
+the subsystem interact with its peers.&lt;/p&gt;
+
+&lt;p&gt;In our microservices, we must write integration tests to verify those
+interactions between layers of integration code and the external component that
+we integrate with.&lt;/p&gt;
+
+&lt;h3 id=&quot;mocking-vs-integration-testing&quot;&gt;Mocking vs Integration testing&lt;/h3&gt;
+
+&lt;p&gt;In order for our microservices to do their job they need to communicate with
+other services, so to test a microservice in isolation we need to mock other
+dependencies so that the only thing under the test is the unit that we are
+testing and when the test fails we can easily determine the issue.&lt;/p&gt;
+
+&lt;p&gt;Mocking is effective with unit tests, With that said, if integration tests are
+not done properly, it will do more harm than good. Imagine if one of our
+dependencies changed its API, our service test cases will still pass while they
+should fail as they use the mock instead of making the real call, and another
+downside is that you have to maintain these mocks as other services change.&lt;/p&gt;
+
+&lt;h3 id=&quot;component-testing&quot;&gt;Component testing&lt;/h3&gt;
+
+&lt;p&gt;First let’s define the component boundaries, in our opinion a component is any
+well-encapsulated, coherent and independently replaceable part of a larger
+system.&lt;/p&gt;
+
+&lt;p&gt;Component testing can provide us with a lot of benefits, by limiting all service
+modules to be tested as one single component to avoid any complex behaviour that
+service may have while connecting to another service.&lt;/p&gt;
+
+&lt;p&gt;Also isolating your modules as a single component with test doubles will define
+the component behaviours and define tests for that behaviour together using
+component tests.&lt;/p&gt;
+
+&lt;h3 id=&quot;end-to-end-tests&quot;&gt;End-to-End tests&lt;/h3&gt;
+
+&lt;p&gt;End-to-end tests run against your entire system to verify that all your system
+parts are working together as expected, so when they pass you feel confident
+that your code will work in production as expected because they test the entire
+process and the user flow.&lt;/p&gt;
+
+&lt;p&gt;As end-to-end test scope increases the feedback cycle time increases as well
+because tests take a longer time to run, and when a test fails it is hard to
+determine which part is broken and here comes the role of other lower level
+types of testing.&lt;/p&gt;
+
+&lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
+
+&lt;p&gt;High-level tests provide verification that the system works as expected and all
+parts are connected together in a proper way, while low-level tests provide a
+way to verify that each piece of code is doing its job correctly, and when it
+doesn’t you will know accurately the reason.&lt;/p&gt;
+
+&lt;p&gt;The combination of different type of test strategies leads to more code coverage
+that help you to find edge cases that we need to handle in our actual code.&lt;/p&gt;</content><author><name></name></author><summary type="html">A microservice architecture involves many moving parts with different guarantees and failure modes, testing these systems is more challenging than testing traditional monolithic application. an effective test strategy needs to account for testing individual services in isolation and the verification of overall system behaviour.</summary></entry><entry><title type="html">Software Components</title><link href="/2019/07/01/software-components.html" rel="alternate" type="text/html" title="Software Components" /><published>2019-07-01T00:00:00-05:00</published><updated>2019-07-01T00:00:00-05:00</updated><id>/2019/07/01/software-components</id><content type="html" xml:base="/2019/07/01/software-components.html">&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/1600/0*bnfIs_NW1Xz3P9r3&quot; alt=&quot;&quot; /&gt;
+&lt;span class=&quot;figcaption_hack&quot;&gt;Photo by
+&lt;a href=&quot;https://unsplash.com/@fancycrave?utm_source=medium&amp;amp;utm_medium=referral&quot;&gt;Fancycrave&lt;/a&gt;
+on &lt;a href=&quot;https://unsplash.com?utm_source=medium&amp;amp;utm_medium=referral&quot;&gt;Unsplash&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;Components are the units of deployment, they are the smallest entity that can be
+deployed as part of the system, In Java, they are Jar files, In Ruby, they are
+gems files.&lt;/p&gt;
+
+&lt;p&gt;Components can be linked together into a single executable or they can be
+independently deployed as separate plugins, regardless of how they have
+eventually deployed well-designed components always retain the ability to be
+independently deployed and developed.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;We will discuss a little how we can design a cohesive software component, we
+will discuss &lt;strong&gt;principles of components cohesion&lt;/strong&gt; which &lt;a href=&quot;https://en.wikipedia.org/wiki/Robert_C._Martin&quot;&gt;uncle
+bob&lt;/a&gt; defined them in details in
+his book &lt;a href=&quot;https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882&quot;&gt;clean
+architecture&lt;/a&gt;.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;REP: Reuse-Release Equivalence principle.&lt;/li&gt;
+  &lt;li&gt;CCP: Common Closure Principle.&lt;/li&gt;
+  &lt;li&gt;CRP: Common Reuse Principle.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;rep-reuse-release-equivalence-principle&quot;&gt;REP: Reuse-Release Equivalence Principle&lt;/h4&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;the granule of reuse is the granule of release.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;To reuse a software component you can’t do so unless that component tracked
+through a release process and is given a release number because without a
+release number there would be no way to ensure that all the reused components
+that you’re using are compatible with each other.&lt;/p&gt;
+
+&lt;p&gt;This principle means that the classes and modules that are formed into a
+component must belong t a cohesive group. a software component can not consist
+of random classes and modules there’s must be some overarching theme of purpose.&lt;/p&gt;
+
+&lt;h4 id=&quot;ccp-common-closure-principle&quot;&gt;CCP: Common Closure Principle&lt;/h4&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;gather into component those classes that change for the same reason and at the
+same time separate into different components those classes that change at a
+different time and for different reasons.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The CCP is the component form for the
+&lt;a href=&quot;https://en.wikipedia.org/wiki/Single_responsibility_principle&quot;&gt;SRP&lt;/a&gt;, while the
+&lt;a href=&quot;https://en.wikipedia.org/wiki/Single_responsibility_principle&quot;&gt;SRP&lt;/a&gt; tells us to
+separate methods into different classes if they change for different reasons,
+the CCP tells us to separate classes into different components if they change
+for different reasons.&lt;/p&gt;
+
+&lt;h4 id=&quot;crp-common-reuse-principle&quot;&gt;CRP: Common Reuse Principle&lt;/h4&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Don’t force users of a component to depend on things they don’t need.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The CRP is a generic version of the
+&lt;a href=&quot;https://en.wikipedia.org/wiki/Interface_segregation_principle&quot;&gt;ISP&lt;/a&gt;, while the
+&lt;a href=&quot;https://en.wikipedia.org/wiki/Interface_segregation_principle&quot;&gt;ISP&lt;/a&gt; advised us
+not to depend on classes that have methods we don’t need the CRP advice us not
+to use components that have classes we don’t need.&lt;/p&gt;
+
+&lt;h4 id=&quot;conclusion&quot;&gt;CONCLUSION&lt;/h4&gt;
+
+&lt;p&gt;Finally, that was a very simple introduction to how to develop a cohesive
+component, helping you to take the decision of which classes belong in which
+components.&lt;/p&gt;</content><author><name></name></author><summary type="html">Photo by Fancycrave on Unsplash</summary></entry><entry><title type="html">Notes on building microservices</title><link href="/2019/07/01/notes-on-building-microservices.html" rel="alternate" type="text/html" title="Notes on building microservices" /><published>2019-07-01T00:00:00-05:00</published><updated>2019-07-01T00:00:00-05:00</updated><id>/2019/07/01/notes-on-building-microservices</id><content type="html" xml:base="/2019/07/01/notes-on-building-microservices.html">&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/1440/1*3JKJYR37PS9JMy1gGIi0fw.jpeg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The idea of separating application into a smaller parts is nothing new, there
+are other programming paradigms which address this same concept However, recent
+technology advances coupled with an increasing expectation of integrated
+“digital experiences” have given rise to a new breed of development tools and
+techniques used to meet the needs of modern business applications.&lt;/p&gt;
+
+&lt;h3 id=&quot;what-are-microservices&quot;&gt;What Are Microservices?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;A small autonomous services that works together&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;that not detailed definition let’s discuss it more&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Small&lt;/strong&gt; and focused on doing one thing well, when it comes to how small is
+small enough the smaller the service the more you maximize the benefits and the
+down sides of microservices, in a monolithic codebase it can be difficult to
+know where a change needs to be made because the codebase getting larger
+overtime, so we keep trying to ensuere code quality by creating abstraction or
+modules the drive to have related code grouped together is an important concept
+this comes to single responsibility principles, that’s why we focus our services
+boundaries on business boundaries making it obvious where code lives for a given
+piece of functionality where the service focused on an explicit boundaries.&lt;/p&gt;
+
+&lt;p&gt;**Autonomous, **it means that the microservice is a separated entity that might
+be deployed as an isolated service on platform or it might has it’s own
+operation system process.&lt;/p&gt;
+
+&lt;h3 id=&quot;key-benefits-from-microservices-architecture&quot;&gt;&lt;strong&gt;Key benefits from Microservices architecture&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Technology Heterogeneity&lt;/strong&gt;: with system composed of multiple service we can
+decide to use different technologies inside each one.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Resilience&lt;/strong&gt;: if one of system component failed you can isolate it and your
+system should operate normally.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Scaling&lt;/strong&gt;: with a large monolithic app you must scale everything as one piece
+on the other hand with a small services you can just scale that small service
+that needs a scaling.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Ease of deployment&lt;/strong&gt;: with microservices you can change to an single service
+and deploy it independently of the rest of the system this means faster
+deployment, lower risk than deployment in a monolithic app which means a
+one-line change requires the whole system to be deployed in order to release the
+change.&lt;/li&gt;
+  &lt;li&gt;**Organizational alignment: **microservices helps you to have better align our
+architecture to your organization, by minimizing the number of people working on
+any one codebase to hit the sweet spot of team size and productivity.&lt;/li&gt;
+  &lt;li&gt;**Optimizing for replaceability: **with our individual services being small in
+size the cost to replace them with a better implementation is much easier to
+mange.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This blog is my notes on chapter 1 from &lt;a href=&quot;http://shop.oreilly.com/product/0636920033158.do&quot;&gt;Building microservices book for sam
+newman&lt;/a&gt; and it’s a part of my
+blog series discuss microservice architecture.&lt;/p&gt;</content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">Symfony Performance Logger</title><link href="/2019/06/27/symfony-performance-logger.html" rel="alternate" type="text/html" title="Symfony Performance Logger" /><published>2019-06-27T00:00:00-05:00</published><updated>2019-06-27T00:00:00-05:00</updated><id>/2019/06/27/symfony-performance-logger</id><content type="html" xml:base="/2019/06/27/symfony-performance-logger.html">&lt;h3 id=&quot;performance-logger-on-producation-&quot;&gt;Performance Logger ON Producation !&lt;/h3&gt;
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Doctrine&lt;/code&gt; already ships with an awesome logger. Symfony enables that logger on dev mode the doctrine tab that we see on the profile comes from logger itself Symfony just display it.&lt;/p&gt;
 

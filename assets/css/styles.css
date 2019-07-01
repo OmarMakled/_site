@@ -1018,10 +1018,14 @@ a {
     text-transform: uppercase;
     letter-spacing: 0.2em;
     margin-bottom: 1em; }
+  .about p {
+    letter-spacing: 0.1em; }
 
 .posts ul li {
   border-bottom: 1px solid #e6e6e6;
-  padding: 20px 0 20px; }
+  padding: 20px 0 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em; }
 
 svg.icon {
   width: 0.7em;
