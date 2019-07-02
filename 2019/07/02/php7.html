@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>New PHP 7 Features</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="icon" href="/assets/css/favicon.png" type="image/png">
+</head>
+
+<body>
+  <div class="container">
+    <div class="markdown-body m-b m-t">
+      <h2 id="new-php-7-features">New PHP 7 features</h2>
+
+<ul>
+  <li><a href="#scalar-type-hints">Scalar type hints</a></li>
+  <li><a href="#return-type-declarations">Return type declarations</a></li>
+  <li><a href="#anonymous-classes">Anonymous classes</a></li>
+  <li><a href="#the-closure::call-method">The Closure::call() method</a></li>
+  <li><a href="#the-null-coalesce-operator">The null coalesce operator</a></li>
+  <li><a href="#the-space-ship-operator">The space ship operator</a></li>
+  <li><a href="#throwables">Throwables</a></li>
+  <li><a href="#level-support-for-the-dirname-function">Level support for the dirname() function</a></li>
+  <li><a href="#the-integer-division-function">The Integer division function</a></li>
+  <li>Uniform variable syntax</li>
+  <li>Generator delegation</li>
+  <li>Generator return expressions</li>
+</ul>
+
+<h3 id="scalar-type-hints">Scalar type hints</h3>
+
+<p>Type hints or type declarations have been available in PHP for while now. Unfortunately they were restricted to classes, arrays and callables.</p>
+
+<p>As of PHP 7, the scalar types (integers, floating point numbers, booleans and strings) can also be used as type hints.</p>
+
+<p>It allows developers to ensure a better input consistency of a function/method interface.</p>
+
+<p>By default “coercive mode” is enabled. This restricts PHP from throwing a type error when the types don’t exactly match, but when a conversion is still possible.</p>
+
+<p>If you enable “strict mode”, a type error is thrown when the signatures don’t match.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+<span class="k">declare</span><span class="p">(</span><span class="nx">strict_types</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>
+<span class="sd">/**
+ * Scalar type declarations
+ */</span>
+<span class="k">function</span> <span class="nf">add</span><span class="p">(</span><span class="nx">int</span> <span class="nv">$a</span><span class="p">,</span> <span class="nx">int</span> <span class="nv">$b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nv">$a</span> <span class="o">+</span> <span class="nv">$b</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">echo</span><span class="p">(</span><span class="nx">add</span><span class="p">(</span><span class="s2">"1"</span><span class="p">,</span> <span class="s2">"2"</span><span class="p">));</span>
+</code></pre></div></div>
+
+<h3 id="return-type-declarations">Return type declarations</h3>
+
+<p>Whereas type hints ensure input consistency, return type declarations ensure output consistency.</p>
+
+<p>We use a colon before the opening curly brace of a function to hint the return type.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sd">/**
+ * Return type declarations
+ */</span>
+<span class="k">function</span> <span class="nf">add</span><span class="p">(</span><span class="nx">int</span> <span class="nv">$a</span><span class="p">,</span> <span class="nx">int</span> <span class="nv">$b</span><span class="p">)</span><span class="o">:</span> <span class="nx">int</span><span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="nx">string</span><span class="p">)(</span><span class="nv">$a</span> <span class="o">+</span> <span class="nv">$b</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The same strictness rules apply as with the type hints: if “strict mode” is disabled, return values that can be converted to the preferred type are allowed. If you enable “strict mode” this code will throw a type error.</p>
+
+<h3 id="anonymous-classes">Anonymous classes</h3>
+
+<p>Anonymous classes are useful for simple one-off objects. With anonymous classes you can define a class and instantiate an object inline.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sd">/**
+ * Anonymous classes
+ */</span>
+<span class="nv">$foo</span> <span class="o">=</span> <span class="k">new</span> <span class="k">class</span> <span class="err">{</span>
+    <span class="nc">public</span> <span class="k">function</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="s2">"bar"</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+<span class="k">echo</span><span class="p">(</span><span class="nv">$foo</span><span class="o">-&gt;</span><span class="na">foo</span><span class="p">());</span>
+</code></pre></div></div>
+
+<h3 id="the-closurecall-method">The Closure::call() method</h3>
+
+<p>An anonymous function is simply a function with no name.
+For example, to create a regular function, you might write something like this:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="nf">greeting</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s2">"Hello world"</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>You can then simply call this function like this:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">echo</span> <span class="nx">greeting</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>An anonymous function has no name so you would define it like this:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s2">"Hello world"</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Because the function has no name, you can’t call it like a regular function. Instead you must either assign it to a variable or pass it to another function as an argument.</p>
+
+<p>Closures are anonymous functions that are declared inline and assigned to a variable. It can be used as a callback for later execution. In PHP 5 it was already possible to bind an object to the scope of the closure as if it was a method.</p>
+
+<p>The “call” method is one of the PHP 7 features that was introduced to simplify the process.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Foo</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$foo</span> <span class="o">=</span> <span class="s1">'bar'</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nv">$cb</span> <span class="o">=</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nb">ucwords</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">foo</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">echo</span> <span class="nv">$cb</span><span class="o">-&gt;</span><span class="na">call</span><span class="p">(</span><span class="k">new</span> <span class="nx">Foo</span><span class="p">)</span> <span class="o">.</span> <span class="nx">PHP_EOL</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>It’s useful because they are throw away functions that you can use once. Often, you will need a function to do a job, but it doesn’t make sense to have it within the global scope or to even make it available as part of your code.</p>
+
+<h3 id="the-null-coalesce-operator">The null coalesce operator</h3>
+
+<p>The null coalesce operator is a shorthand for checking if a value is set and not null within inline comparisons. Instead of doing the same old “isset” check over and over again, just use “??” to return the value if it is set (and not null) or an alternative value instead.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sd">/**
+ * Null coalesce operator
+ */</span>
+<span class="nv">$array</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'foo'</span><span class="o">=&gt;</span><span class="s1">'bar'</span><span class="p">];</span>
+<span class="c1">//PHP5 style</span>
+<span class="nv">$message</span> <span class="o">=</span> <span class="nb">isset</span><span class="p">(</span><span class="nv">$array</span><span class="p">[</span><span class="s1">'foo'</span><span class="p">])</span> <span class="o">?</span> <span class="nv">$array</span><span class="p">[</span><span class="s1">'foo'</span><span class="p">]</span> <span class="o">:</span> <span class="s1">'not set'</span><span class="p">;</span>
+<span class="k">echo</span> <span class="nv">$message</span><span class="o">.</span><span class="nx">PHP_EOL</span><span class="p">;</span>
+<span class="c1">//PHP7 style</span>
+<span class="nv">$message</span> <span class="o">=</span> <span class="nv">$array</span><span class="p">[</span><span class="s1">'foo'</span><span class="p">]</span> <span class="o">??</span> <span class="s1">'not set'</span><span class="p">;</span>
+<span class="k">echo</span> <span class="nv">$message</span><span class="o">.</span><span class="nx">PHP_EOL</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="the-space-ship-operator">The space ship operator</h3>
+
+<p>The so-called “space ship operator” makes it easier to compare values. Instead of returning a typical true/false value, the space ship operator returns one of the follow values based on the result of the evaluation:</p>
+
+<ul>
+  <li>0 when both values are equal</li>
+  <li>-1 when the left value is less than the right value</li>
+  <li>1 if the left value is greater than the right value</li>
+</ul>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sd">/**
+ * Space ship operator
+ */</span>
+<span class="nv">$array</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"1 &lt;=&gt; 1"</span> <span class="o">=&gt;</span> <span class="mi">1</span> <span class="o">&lt;=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"1 &lt;=&gt; 2"</span> <span class="o">=&gt;</span> <span class="mi">1</span> <span class="o">&lt;=&gt;</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">"2 &lt;=&gt; 1"</span> <span class="o">=&gt;</span> <span class="mi">2</span> <span class="o">&lt;=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+<span class="p">];</span>
+<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$array</span><span class="p">);</span>
+
+</code></pre></div></div>
+
+<h3 id="throwables">Throwables</h3>
+
+<p>A big change in PHP 7 is the fact that errors are no longer raised the way they used to be raised. Errors now behave in a similar way as exceptions. They both inherit from the Throwable interface.</p>
+
+<p>This means that errors can now be caught in a try/catch block. You can catch both exceptions and errors as Throwables, but you can also catch errors as Error objects.</p>
+
+<p>An Error “indicates serious problems that a reasonable application should not try to catch.”</p>
+
+<p>An Exception “indicates conditions that a reasonable application might want to catch.”</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+<span class="sd">/**
+ * Throwable interface
+ */</span>
+<span class="c1">//Error as Throwable</span>
+<span class="k">try</span> <span class="p">{</span>
+    <span class="nx">sqdf</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">Throwable</span> <span class="nv">$t</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s2">"Throwable: "</span><span class="o">.</span><span class="nv">$t</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">()</span><span class="o">.</span><span class="nx">PHP_EOL</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">//Exception as Throwable</span>
+<span class="k">try</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nx">Exception</span><span class="p">(</span><span class="s2">"Bla"</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">Throwable</span> <span class="nv">$t</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s2">"Throwable: "</span><span class="o">.</span><span class="nv">$t</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">()</span><span class="o">.</span><span class="nx">PHP_EOL</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">//Error</span>
+<span class="k">try</span> <span class="p">{</span>
+    <span class="nx">sqdf</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">Error</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s2">"Error: "</span><span class="o">.</span><span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">()</span><span class="o">.</span><span class="nx">PHP_EOL</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">Exception</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s2">"Exception: "</span><span class="o">.</span><span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">()</span><span class="o">.</span><span class="nx">PHP_EOL</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">//Exception</span>
+<span class="k">try</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nx">Exception</span><span class="p">(</span><span class="s2">"Bla"</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">Error</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s2">"Error: "</span><span class="o">.</span><span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">()</span><span class="o">.</span><span class="nx">PHP_EOL</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">Exception</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s2">"Exception: "</span><span class="o">.</span><span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">()</span><span class="o">.</span><span class="nx">PHP_EOL</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">//Type error</span>
+<span class="k">try</span> <span class="p">{</span>
+    <span class="k">function</span> <span class="nf">add</span><span class="p">(</span><span class="nx">int</span> <span class="nv">$a</span><span class="p">,</span> <span class="nx">int</span> <span class="nv">$b</span><span class="p">)</span><span class="o">:</span><span class="nx">int</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$a</span> <span class="o">+</span> <span class="nv">$b</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">echo</span> <span class="nx">add</span><span class="p">(</span><span class="k">array</span><span class="p">(),</span> <span class="k">array</span><span class="p">());</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">TypeError</span> <span class="nv">$t</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s2">"Type error: "</span><span class="o">.</span><span class="nv">$t</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">()</span><span class="o">.</span><span class="nx">PHP_EOL</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="level-support-for-the-dirname-function">Level support for the dirname() function</h3>
+
+<p>The dirname function is used more often than you would think. It is the ideal function to refer to directories in a relative way.</p>
+
+<p>But when you want to go a couple of levels up, you end up nesting dirname calls and that will eventually lead to confusion.</p>
+
+<p>As of PHP 7 the dirname function has a second argument that indicates how many levels your going up the directory tree. If you don’t enter a value, 1 is the default.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">echo</span> <span class="nb">dirname</span><span class="p">(</span><span class="s1">'/usr/local/bin'</span><span class="p">)</span><span class="o">.</span><span class="nx">PHP_EOL</span><span class="p">;</span>
+<span class="k">echo</span> <span class="nb">dirname</span><span class="p">(</span><span class="s1">'/usr/local/bin'</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="nx">PHP_EOL</span><span class="p">;</span>
+<span class="k">echo</span> <span class="nb">dirname</span><span class="p">(</span><span class="s1">'/usr/local/bin'</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="nx">PHP_EOL</span><span class="p">;</span>
+<span class="k">echo</span> <span class="nb">dirname</span><span class="p">(</span><span class="s1">'/usr/local/bin'</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="nx">PHP_EOL</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="the-integer-division-function">The Integer division function</h3>
+
+<p>Maybe not one the most important PHP 7 features, but still worth mentioning: the intdiv function returns the integer value of a division whereas regular divisions can result in a float being returned.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">echo</span> <span class="p">(</span><span class="nb">intdiv</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span> <span class="o">.</span> <span class="nx">PHP_EOL</span><span class="p">;</span>
+
+<span class="k">echo</span> <span class="mi">10</span> <span class="o">/</span> <span class="mi">3</span><span class="p">;</span>
+</code></pre></div></div>
+
+    </div>
+    <div class="nav m-b">
+      
+      <a class="" href="/2019/07/01/testing-microservices.html">&laquo; Testing Microservices</a>
+      
+      <a class="" href="/">Home</a>
+      
+    </div>
+  </div>
+</body>
+
+</html>

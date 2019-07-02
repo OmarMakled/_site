@@ -1047,3 +1047,6 @@ svg.icon {
   justify-content: space-between; }
   .nav a {
     text-decoration: underline; }
+
+.markdown-body ol, .markdown-body ul {
+  padding-left: 0; }

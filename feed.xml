@@ -1,227 +1,453 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2019-07-01T04:36:56-05:00</updated><id>/feed.xml</id><title type="html">Omar Makled</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Testing Microservices</title><link href="/2019/07/01/testing-microservices.html" rel="alternate" type="text/html" title="Testing Microservices" /><published>2019-07-01T00:00:00-05:00</published><updated>2019-07-01T00:00:00-05:00</updated><id>/2019/07/01/testing-microservices</id><content type="html" xml:base="/2019/07/01/testing-microservices.html">&lt;p&gt;A microservice architecture involves many moving parts with different guarantees
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2019-07-02T03:07:21-05:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Omar Makled</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">New PHP 7 Features</title><link href="http://0.0.0.0:4000/2019/07/02/php7.html" rel="alternate" type="text/html" title="New PHP 7 Features" /><published>2019-07-02T00:00:00-05:00</published><updated>2019-07-02T00:00:00-05:00</updated><id>http://0.0.0.0:4000/2019/07/02/php7</id><content type="html" xml:base="http://0.0.0.0:4000/2019/07/02/php7.html">## New PHP 7 features
+
+- [Scalar type hints](#scalar-type-hints)
+- [Return type declarations](#return-type-declarations)
+- [Anonymous classes](#anonymous-classes)
+- [The Closure::call() method](#the-closure::call-method)
+- [The null coalesce operator](#the-null-coalesce-operator)
+- [The space ship operator](#the-space-ship-operator)
+- [Throwables](#throwables)
+- [Level support for the dirname() function](#level-support-for-the-dirname-function)
+- [The Integer division function](#the-integer-division-function)
+- Uniform variable syntax
+- Generator delegation
+- Generator return expressions
+
+### Scalar type hints
+
+Type hints or type declarations have been available in PHP for while now. Unfortunately they were restricted to classes, arrays and callables.
+
+As of PHP 7, the scalar types (integers, floating point numbers, booleans and strings) can also be used as type hints.
+
+It allows developers to ensure a better input consistency of a function/method interface.
+
+By default “coercive mode” is enabled. This restricts PHP from throwing a type error when the types don’t exactly match, but when a conversion is still possible.
+
+If you enable “strict mode”, a type error is thrown when the signatures don’t match.
+
+```php
+&lt;?php
+declare(strict_types=1);
+/**
+ * Scalar type declarations
+ */
+function add(int $a, int $b) {
+    return $a + $b;
+}
+
+echo(add(&quot;1&quot;, &quot;2&quot;));
+```
+
+### Return type declarations
+
+Whereas type hints ensure input consistency, return type declarations ensure output consistency.
+
+We use a colon before the opening curly brace of a function to hint the return type.
+
+```php
+/**
+ * Return type declarations
+ */
+function add(int $a, int $b): int{
+    return (string)($a + $b);
+}
+```
+
+The same strictness rules apply as with the type hints: if “strict mode” is disabled, return values that can be converted to the preferred type are allowed. If you enable “strict mode” this code will throw a type error.
+
+### Anonymous classes
+
+Anonymous classes are useful for simple one-off objects. With anonymous classes you can define a class and instantiate an object inline.
+
+```php
+/**
+ * Anonymous classes
+ */
+$foo = new class {
+    public function foo() {
+        return &quot;bar&quot;;
+    }
+};
+echo($foo-&gt;foo());
+```
+
+### The Closure::call() method
+
+An anonymous function is simply a function with no name.
+For example, to create a regular function, you might write something like this:
+
+```php
+function greeting () {
+    return &quot;Hello world&quot;;
+}
+```
+
+You can then simply call this function like this:
+
+```php
+echo greeting();
+```
+
+An anonymous function has no name so you would define it like this:
+
+```php
+function () {
+    return &quot;Hello world&quot;;
+}
+```
+
+Because the function has no name, you can’t call it like a regular function. Instead you must either assign it to a variable or pass it to another function as an argument.
+
+Closures are anonymous functions that are declared inline and assigned to a variable. It can be used as a callback for later execution. In PHP 5 it was already possible to bind an object to the scope of the closure as if it was a method.
+
+The “call” method is one of the PHP 7 features that was introduced to simplify the process.
+
+```php
+class Foo
+{
+    private $foo = 'bar';
+}
+
+$cb = function () {
+    return ucwords($this-&gt;foo);
+};
+
+echo $cb-&gt;call(new Foo) . PHP_EOL;
+```
+
+It's useful because they are throw away functions that you can use once. Often, you will need a function to do a job, but it doesn’t make sense to have it within the global scope or to even make it available as part of your code.
+
+### The null coalesce operator
+
+The null coalesce operator is a shorthand for checking if a value is set and not null within inline comparisons. Instead of doing the same old “isset” check over and over again, just use “??” to return the value if it is set (and not null) or an alternative value instead.
+
+```php
+/**
+ * Null coalesce operator
+ */
+$array = ['foo'=&gt;'bar'];
+//PHP5 style
+$message = isset($array['foo']) ? $array['foo'] : 'not set';
+echo $message.PHP_EOL;
+//PHP7 style
+$message = $array['foo'] ?? 'not set';
+echo $message.PHP_EOL;
+```
+
+### The space ship operator
+
+The so-called “space ship operator” makes it easier to compare values. Instead of returning a typical true/false value, the space ship operator returns one of the follow values based on the result of the evaluation:
+
+- 0 when both values are equal
+- -1 when the left value is less than the right value
+- 1 if the left value is greater than the right value
+
+```php
+/**
+ * Space ship operator
+ */
+$array = [
+    &quot;1 &lt;=&gt; 1&quot; =&gt; 1 &lt;=&gt; 1,
+    &quot;1 &lt;=&gt; 2&quot; =&gt; 1 &lt;=&gt; 2,
+    &quot;2 &lt;=&gt; 1&quot; =&gt; 2 &lt;=&gt; 1,
+];
+var_dump($array);
+
+```
+
+### Throwables
+
+A big change in PHP 7 is the fact that errors are no longer raised the way they used to be raised. Errors now behave in a similar way as exceptions. They both inherit from the Throwable interface.
+
+This means that errors can now be caught in a try/catch block. You can catch both exceptions and errors as Throwables, but you can also catch errors as Error objects.
+
+An Error &quot;indicates serious problems that a reasonable application should not try to catch.&quot;
+
+An Exception &quot;indicates conditions that a reasonable application might want to catch.&quot;
+
+```php
+&lt;?php
+/**
+ * Throwable interface
+ */
+//Error as Throwable
+try {
+    sqdf();
+} catch (Throwable $t) {
+    echo &quot;Throwable: &quot;.$t-&gt;getMessage().PHP_EOL;
+}
+//Exception as Throwable
+try {
+    throw new Exception(&quot;Bla&quot;);
+} catch (Throwable $t) {
+    echo &quot;Throwable: &quot;.$t-&gt;getMessage().PHP_EOL;
+}
+//Error
+try {
+    sqdf();
+} catch (Error $e) {
+    echo &quot;Error: &quot;.$e-&gt;getMessage().PHP_EOL;
+} catch (Exception $e) {
+    echo &quot;Exception: &quot;.$e-&gt;getMessage().PHP_EOL;
+}
+//Exception
+try {
+    throw new Exception(&quot;Bla&quot;);
+} catch (Error $e) {
+    echo &quot;Error: &quot;.$e-&gt;getMessage().PHP_EOL;
+} catch (Exception $e) {
+    echo &quot;Exception: &quot;.$e-&gt;getMessage().PHP_EOL;
+}
+//Type error
+try {
+    function add(int $a, int $b):int {
+        return $a + $b;
+    }
+    echo add(array(), array());
+} catch (TypeError $t) {
+    echo &quot;Type error: &quot;.$t-&gt;getMessage().PHP_EOL;
+}
+```
+
+### Level support for the dirname() function
+
+The dirname function is used more often than you would think. It is the ideal function to refer to directories in a relative way.
+
+But when you want to go a couple of levels up, you end up nesting dirname calls and that will eventually lead to confusion.
+
+As of PHP 7 the dirname function has a second argument that indicates how many levels your going up the directory tree. If you don’t enter a value, 1 is the default.
+
+```php
+echo dirname('/usr/local/bin').PHP_EOL;
+echo dirname('/usr/local/bin',1).PHP_EOL;
+echo dirname('/usr/local/bin',2).PHP_EOL;
+echo dirname('/usr/local/bin',3).PHP_EOL;
+```
+
+### The Integer division function
+
+Maybe not one the most important PHP 7 features, but still worth mentioning: the intdiv function returns the integer value of a division whereas regular divisions can result in a float being returned.
+
+```php
+echo (intdiv(10, 3)) . PHP_EOL;
+
+echo 10 / 3;
+```</content><author><name></name></author><summary type="html">New PHP 7 features</summary></entry><entry><title type="html">Testing Microservices</title><link href="http://0.0.0.0:4000/2019/07/01/testing-microservices.html" rel="alternate" type="text/html" title="Testing Microservices" /><published>2019-07-01T00:00:00-05:00</published><updated>2019-07-01T00:00:00-05:00</updated><id>http://0.0.0.0:4000/2019/07/01/testing-microservices</id><content type="html" xml:base="http://0.0.0.0:4000/2019/07/01/testing-microservices.html">A microservice architecture involves many moving parts with different guarantees
 and failure modes, testing these systems is more challenging than testing
 traditional monolithic application. an effective test strategy needs to account
 for testing individual services in isolation and the verification of overall
-system behaviour.&lt;/p&gt;
+system behaviour.
 
-&lt;h3 id=&quot;what-are-microservices&quot;&gt;What are microservices?&lt;/h3&gt;
+### What are microservices?
 
-&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/1600/0*35CIX00OXWaVH57g.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+![](https://cdn-images-1.medium.com/max/1600/0*35CIX00OXWaVH57g.png)
 
-&lt;p&gt;There are two basic software development styles, first and most common style is
+There are two basic software development styles, first and most common style is
 monolithic Application, it is called monolith because it consists of a single
-application contained in a single process.&lt;/p&gt;
+application contained in a single process.
 
-&lt;p&gt;The microservices architectural style in the other hand involves developing
+The microservices architectural style in the other hand involves developing
 single applications that can work together with a suite of small autonomous
 services, each running in its individual process and communicating using
 lightweight mechanisms such as HTTP resource API. These services can be written
 in different programming language and different data storage technologies, and
-each of them can be deployed and scaled independently.&lt;/p&gt;
+each of them can be deployed and scaled independently.
 
-&lt;h3 id=&quot;why-do-we-test&quot;&gt;Why do we test?&lt;/h3&gt;
+### Why do we test?
 
-&lt;p&gt;Do we ?! To code with confident like that, We need to write tests that verify
+Do we ?! To code with confident like that, We need to write tests that verify
 our code is running in a proper way, writing tests make code maintenance much
 easier because you have what assure that your maintenance for one part won’t
 affect other parts in a wrong way, also writing tests can provide us feedback
 about the system if it is working properly in a fast, accurate way while you can
 do this in a manual way, it will never be as accurate, fast as the automated
-test cases.&lt;/p&gt;
+test cases.
 
-&lt;p&gt;Writing tests can give you detailed feedback about our code, automated coverage
+Writing tests can give you detailed feedback about our code, automated coverage
 report can tell us if the code is tested enough or not and which cases you
-forget to test it.&lt;/p&gt;
+forget to test it.
 
-&lt;h3 id=&quot;different-type-of-testing-strategies&quot;&gt;Different type of testing strategies&lt;/h3&gt;
+### Different type of testing strategies
 
-&lt;p&gt;In microservice architecture, your system is built as suites of collaborating
-services.&lt;/p&gt;
+In microservice architecture, your system is built as suites of collaborating
+services.
 
-&lt;p&gt;To verify that services work together in a harmony we had to write different
+To verify that services work together in a harmony we had to write different
 types of test strategies starting from basic unit tests that exercises the
 smallest piece of testable software in the application to determine whether it
 behaves as expected, to the End to End testing which verifies that a system
-meets the external requirements and achieve its goals.&lt;/p&gt;
+meets the external requirements and achieve its goals.
 
-&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/1600/0*L7uyy4tWZ_LK9LIC.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+![](https://cdn-images-1.medium.com/max/1600/0*L7uyy4tWZ_LK9LIC.png)
 
-&lt;p&gt;the test pyramid helps us to identify different types of tests and when to use
-each of them.&lt;/p&gt;
+the test pyramid helps us to identify different types of tests and when to use
+each of them.
 
-&lt;p&gt;We use those different test strategies except the last one the exploratory,
+We use those different test strategies except the last one the exploratory,
 which basically an automated regression testing that runs across the whole
-system, but we hope to reach this level soon.&lt;/p&gt;
+system, but we hope to reach this level soon.
 
-&lt;p&gt;let’s go bottom up throw those strategies one by one.&lt;/p&gt;
+let’s go bottom up throw those strategies one by one.
 
-&lt;p&gt;Our Microservices usually contains different smaller modules (Repositories,
-Service layer, Resources, Gateway, ORM. etc)&lt;/p&gt;
+Our Microservices usually contains different smaller modules (Repositories,
+Service layer, Resources, Gateway, ORM. etc)
 
-&lt;p&gt;each module should have it’s independent &lt;strong&gt;unit tests&lt;/strong&gt; that are verifying that
-module working in a proper way independently.&lt;/p&gt;
+each module should have it’s independent **unit tests** that are verifying that
+module working in a proper way independently.
 
-&lt;h3 id=&quot;but-why-unit-tests-are-not-enough&quot;&gt;But why unit tests are not enough?&lt;/h3&gt;
+### But why unit tests are not enough?
 
-&lt;p&gt;In microservice case unit tests alone is not enough because in our opinion it
+In microservice case unit tests alone is not enough because in our opinion it
 doesn’t cover the whole system behaviours, as we said by unit tests we provide
 good coverage of each core module of the microservice independently but there’s
 no coverage for those modules when the work together as a system or as a
 service, To verify that each module correctly interacts with its collaborators,
-more testing is required.&lt;/p&gt;
+more testing is required.
 
-&lt;h3 id=&quot;integration-testing&quot;&gt;Integration testing&lt;/h3&gt;
+### Integration testing
 
-&lt;p&gt;Integration testing is a testing strategy that we need to verify the interaction
-between various microservice components and detect interface defects.&lt;/p&gt;
+Integration testing is a testing strategy that we need to verify the interaction
+between various microservice components and detect interface defects.
 
-&lt;p&gt;Integration testing collects modules together and tests them as a subsystem to
+Integration testing collects modules together and tests them as a subsystem to
 verify that they collaborate as they intended to achieve some larger piece of
-interactions.&lt;/p&gt;
+interactions.
 
-&lt;p&gt;Also, it verifies that the communication paths between the system to check how
-the subsystem interact with its peers.&lt;/p&gt;
+Also, it verifies that the communication paths between the system to check how
+the subsystem interact with its peers.
 
-&lt;p&gt;In our microservices, we must write integration tests to verify those
+In our microservices, we must write integration tests to verify those
 interactions between layers of integration code and the external component that
-we integrate with.&lt;/p&gt;
+we integrate with.
 
-&lt;h3 id=&quot;mocking-vs-integration-testing&quot;&gt;Mocking vs Integration testing&lt;/h3&gt;
+### Mocking vs Integration testing
 
-&lt;p&gt;In order for our microservices to do their job they need to communicate with
+In order for our microservices to do their job they need to communicate with
 other services, so to test a microservice in isolation we need to mock other
 dependencies so that the only thing under the test is the unit that we are
-testing and when the test fails we can easily determine the issue.&lt;/p&gt;
+testing and when the test fails we can easily determine the issue.
 
-&lt;p&gt;Mocking is effective with unit tests, With that said, if integration tests are
+Mocking is effective with unit tests, With that said, if integration tests are
 not done properly, it will do more harm than good. Imagine if one of our
 dependencies changed its API, our service test cases will still pass while they
 should fail as they use the mock instead of making the real call, and another
-downside is that you have to maintain these mocks as other services change.&lt;/p&gt;
+downside is that you have to maintain these mocks as other services change.
 
-&lt;h3 id=&quot;component-testing&quot;&gt;Component testing&lt;/h3&gt;
+### Component testing
 
-&lt;p&gt;First let’s define the component boundaries, in our opinion a component is any
+First let’s define the component boundaries, in our opinion a component is any
 well-encapsulated, coherent and independently replaceable part of a larger
-system.&lt;/p&gt;
+system.
 
-&lt;p&gt;Component testing can provide us with a lot of benefits, by limiting all service
+Component testing can provide us with a lot of benefits, by limiting all service
 modules to be tested as one single component to avoid any complex behaviour that
-service may have while connecting to another service.&lt;/p&gt;
+service may have while connecting to another service.
 
-&lt;p&gt;Also isolating your modules as a single component with test doubles will define
+Also isolating your modules as a single component with test doubles will define
 the component behaviours and define tests for that behaviour together using
-component tests.&lt;/p&gt;
+component tests.
 
-&lt;h3 id=&quot;end-to-end-tests&quot;&gt;End-to-End tests&lt;/h3&gt;
+### End-to-End tests
 
-&lt;p&gt;End-to-end tests run against your entire system to verify that all your system
+End-to-end tests run against your entire system to verify that all your system
 parts are working together as expected, so when they pass you feel confident
 that your code will work in production as expected because they test the entire
-process and the user flow.&lt;/p&gt;
+process and the user flow.
 
-&lt;p&gt;As end-to-end test scope increases the feedback cycle time increases as well
+As end-to-end test scope increases the feedback cycle time increases as well
 because tests take a longer time to run, and when a test fails it is hard to
 determine which part is broken and here comes the role of other lower level
-types of testing.&lt;/p&gt;
+types of testing.
 
-&lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
+### Conclusion
 
-&lt;p&gt;High-level tests provide verification that the system works as expected and all
+High-level tests provide verification that the system works as expected and all
 parts are connected together in a proper way, while low-level tests provide a
 way to verify that each piece of code is doing its job correctly, and when it
-doesn’t you will know accurately the reason.&lt;/p&gt;
+doesn’t you will know accurately the reason.
 
-&lt;p&gt;The combination of different type of test strategies leads to more code coverage
-that help you to find edge cases that we need to handle in our actual code.&lt;/p&gt;</content><author><name></name></author><summary type="html">A microservice architecture involves many moving parts with different guarantees and failure modes, testing these systems is more challenging than testing traditional monolithic application. an effective test strategy needs to account for testing individual services in isolation and the verification of overall system behaviour.</summary></entry><entry><title type="html">Software Components</title><link href="/2019/07/01/software-components.html" rel="alternate" type="text/html" title="Software Components" /><published>2019-07-01T00:00:00-05:00</published><updated>2019-07-01T00:00:00-05:00</updated><id>/2019/07/01/software-components</id><content type="html" xml:base="/2019/07/01/software-components.html">&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/1600/0*bnfIs_NW1Xz3P9r3&quot; alt=&quot;&quot; /&gt;
+The combination of different type of test strategies leads to more code coverage
+that help you to find edge cases that we need to handle in our actual code.</content><author><name></name></author><summary type="html">A microservice architecture involves many moving parts with different guarantees and failure modes, testing these systems is more challenging than testing traditional monolithic application. an effective test strategy needs to account for testing individual services in isolation and the verification of overall system behaviour.</summary></entry><entry><title type="html">Software Components</title><link href="http://0.0.0.0:4000/2019/07/01/software-components.html" rel="alternate" type="text/html" title="Software Components" /><published>2019-07-01T00:00:00-05:00</published><updated>2019-07-01T00:00:00-05:00</updated><id>http://0.0.0.0:4000/2019/07/01/software-components</id><content type="html" xml:base="http://0.0.0.0:4000/2019/07/01/software-components.html">![](https://cdn-images-1.medium.com/max/1600/0*bnfIs_NW1Xz3P9r3)
 &lt;span class=&quot;figcaption_hack&quot;&gt;Photo by
-&lt;a href=&quot;https://unsplash.com/@fancycrave?utm_source=medium&amp;amp;utm_medium=referral&quot;&gt;Fancycrave&lt;/a&gt;
-on &lt;a href=&quot;https://unsplash.com?utm_source=medium&amp;amp;utm_medium=referral&quot;&gt;Unsplash&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+[Fancycrave](https://unsplash.com/@fancycrave?utm_source=medium&amp;utm_medium=referral)
+on [Unsplash](https://unsplash.com?utm_source=medium&amp;utm_medium=referral)&lt;/span&gt;
 
-&lt;p&gt;Components are the units of deployment, they are the smallest entity that can be
+Components are the units of deployment, they are the smallest entity that can be
 deployed as part of the system, In Java, they are Jar files, In Ruby, they are
-gems files.&lt;/p&gt;
+gems files.
 
-&lt;p&gt;Components can be linked together into a single executable or they can be
+Components can be linked together into a single executable or they can be
 independently deployed as separate plugins, regardless of how they have
 eventually deployed well-designed components always retain the ability to be
-independently deployed and developed.&lt;/p&gt;
+independently deployed and developed.
 
-&lt;hr /&gt;
+---
 
-&lt;p&gt;We will discuss a little how we can design a cohesive software component, we
-will discuss &lt;strong&gt;principles of components cohesion&lt;/strong&gt; which &lt;a href=&quot;https://en.wikipedia.org/wiki/Robert_C._Martin&quot;&gt;uncle
-bob&lt;/a&gt; defined them in details in
-his book &lt;a href=&quot;https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882&quot;&gt;clean
-architecture&lt;/a&gt;.&lt;/p&gt;
+We will discuss a little how we can design a cohesive software component, we
+will discuss **principles of components cohesion** which [uncle
+bob](https://en.wikipedia.org/wiki/Robert_C._Martin) defined them in details in
+his book [clean
+architecture](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882).
 
-&lt;ul&gt;
-  &lt;li&gt;REP: Reuse-Release Equivalence principle.&lt;/li&gt;
-  &lt;li&gt;CCP: Common Closure Principle.&lt;/li&gt;
-  &lt;li&gt;CRP: Common Reuse Principle.&lt;/li&gt;
-&lt;/ul&gt;
+- REP: Reuse-Release Equivalence principle.
+- CCP: Common Closure Principle.
+- CRP: Common Reuse Principle.
 
-&lt;h4 id=&quot;rep-reuse-release-equivalence-principle&quot;&gt;REP: Reuse-Release Equivalence Principle&lt;/h4&gt;
+#### REP: Reuse-Release Equivalence Principle
 
-&lt;blockquote&gt;
-  &lt;p&gt;the granule of reuse is the granule of release.&lt;/p&gt;
-&lt;/blockquote&gt;
+&gt; the granule of reuse is the granule of release.
 
-&lt;p&gt;To reuse a software component you can’t do so unless that component tracked
+To reuse a software component you can't do so unless that component tracked
 through a release process and is given a release number because without a
 release number there would be no way to ensure that all the reused components
-that you’re using are compatible with each other.&lt;/p&gt;
+that you're using are compatible with each other.
 
-&lt;p&gt;This principle means that the classes and modules that are formed into a
+This principle means that the classes and modules that are formed into a
 component must belong t a cohesive group. a software component can not consist
-of random classes and modules there’s must be some overarching theme of purpose.&lt;/p&gt;
+of random classes and modules there’s must be some overarching theme of purpose.
 
-&lt;h4 id=&quot;ccp-common-closure-principle&quot;&gt;CCP: Common Closure Principle&lt;/h4&gt;
+#### CCP: Common Closure Principle
 
-&lt;blockquote&gt;
-  &lt;p&gt;gather into component those classes that change for the same reason and at the
-same time separate into different components those classes that change at a
-different time and for different reasons.&lt;/p&gt;
-&lt;/blockquote&gt;
+&gt; gather into component those classes that change for the same reason and at the
+&gt; same time separate into different components those classes that change at a
+&gt; different time and for different reasons.
 
-&lt;p&gt;The CCP is the component form for the
-&lt;a href=&quot;https://en.wikipedia.org/wiki/Single_responsibility_principle&quot;&gt;SRP&lt;/a&gt;, while the
-&lt;a href=&quot;https://en.wikipedia.org/wiki/Single_responsibility_principle&quot;&gt;SRP&lt;/a&gt; tells us to
+The CCP is the component form for the
+[SRP](https://en.wikipedia.org/wiki/Single_responsibility_principle), while the
+[SRP](https://en.wikipedia.org/wiki/Single_responsibility_principle) tells us to
 separate methods into different classes if they change for different reasons,
 the CCP tells us to separate classes into different components if they change
-for different reasons.&lt;/p&gt;
+for different reasons.
 
-&lt;h4 id=&quot;crp-common-reuse-principle&quot;&gt;CRP: Common Reuse Principle&lt;/h4&gt;
+#### CRP: Common Reuse Principle
 
-&lt;blockquote&gt;
-  &lt;p&gt;Don’t force users of a component to depend on things they don’t need.&lt;/p&gt;
-&lt;/blockquote&gt;
+&gt; Don’t force users of a component to depend on things they don’t need.
 
-&lt;p&gt;The CRP is a generic version of the
-&lt;a href=&quot;https://en.wikipedia.org/wiki/Interface_segregation_principle&quot;&gt;ISP&lt;/a&gt;, while the
-&lt;a href=&quot;https://en.wikipedia.org/wiki/Interface_segregation_principle&quot;&gt;ISP&lt;/a&gt; advised us
+The CRP is a generic version of the
+[ISP](https://en.wikipedia.org/wiki/Interface_segregation_principle), while the
+[ISP](https://en.wikipedia.org/wiki/Interface_segregation_principle) advised us
 not to depend on classes that have methods we don’t need the CRP advice us not
-to use components that have classes we don’t need.&lt;/p&gt;
+to use components that have classes we don’t need.
 
-&lt;h4 id=&quot;conclusion&quot;&gt;CONCLUSION&lt;/h4&gt;
+#### CONCLUSION
 
-&lt;p&gt;Finally, that was a very simple introduction to how to develop a cohesive
+Finally, that was a very simple introduction to how to develop a cohesive
 component, helping you to take the decision of which classes belong in which
-components.&lt;/p&gt;</content><author><name></name></author><summary type="html">Photo by Fancycrave on Unsplash</summary></entry><entry><title type="html">Notes on building microservices</title><link href="/2019/07/01/notes-on-building-microservices.html" rel="alternate" type="text/html" title="Notes on building microservices" /><published>2019-07-01T00:00:00-05:00</published><updated>2019-07-01T00:00:00-05:00</updated><id>/2019/07/01/notes-on-building-microservices</id><content type="html" xml:base="/2019/07/01/notes-on-building-microservices.html">&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/1440/1*3JKJYR37PS9JMy1gGIi0fw.jpeg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+components.</content><author><name></name></author><summary type="html">Photo by Fancycrave on Unsplash</summary></entry><entry><title type="html">Notes on building microservices</title><link href="http://0.0.0.0:4000/2019/07/01/notes-on-building-microservices.html" rel="alternate" type="text/html" title="Notes on building microservices" /><published>2019-07-01T00:00:00-05:00</published><updated>2019-07-01T00:00:00-05:00</updated><id>http://0.0.0.0:4000/2019/07/01/notes-on-building-microservices</id><content type="html" xml:base="http://0.0.0.0:4000/2019/07/01/notes-on-building-microservices.html">![](https://cdn-images-1.medium.com/max/1440/1*3JKJYR37PS9JMy1gGIi0fw.jpeg)
 
-&lt;p&gt;The idea of separating application into a smaller parts is nothing new, there
+The idea of separating application into a smaller parts is nothing new, there
 are other programming paradigms which address this same concept However, recent
 technology advances coupled with an increasing expectation of integrated
 “digital experiences” have given rise to a new breed of development tools and
-techniques used to meet the needs of modern business applications.&lt;/p&gt;
+techniques used to meet the needs of modern business applications.
 
-&lt;h3 id=&quot;what-are-microservices&quot;&gt;What Are Microservices?&lt;/h3&gt;
+### What Are Microservices?
 
-&lt;p&gt;&lt;strong&gt;A small autonomous services that works together&lt;/strong&gt;&lt;/p&gt;
+**A small autonomous services that works together**
 
-&lt;p&gt;that not detailed definition let’s discuss it more&lt;/p&gt;
+that not detailed definition let’s discuss it more
 
-&lt;p&gt;&lt;strong&gt;Small&lt;/strong&gt; and focused on doing one thing well, when it comes to how small is
+**Small** and focused on doing one thing well, when it comes to how small is
 small enough the smaller the service the more you maximize the benefits and the
 down sides of microservices, in a monolithic codebase it can be difficult to
 know where a change needs to be made because the codebase getting larger
@@ -229,93 +455,87 @@ overtime, so we keep trying to ensuere code quality by creating abstraction or
 modules the drive to have related code grouped together is an important concept
 this comes to single responsibility principles, that’s why we focus our services
 boundaries on business boundaries making it obvious where code lives for a given
-piece of functionality where the service focused on an explicit boundaries.&lt;/p&gt;
+piece of functionality where the service focused on an explicit boundaries.
 
-&lt;p&gt;**Autonomous, **it means that the microservice is a separated entity that might
+**Autonomous, **it means that the microservice is a separated entity that might
 be deployed as an isolated service on platform or it might has it’s own
-operation system process.&lt;/p&gt;
+operation system process.
 
-&lt;h3 id=&quot;key-benefits-from-microservices-architecture&quot;&gt;&lt;strong&gt;Key benefits from Microservices architecture&lt;/strong&gt;&lt;/h3&gt;
+### **Key benefits from Microservices architecture**
 
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Technology Heterogeneity&lt;/strong&gt;: with system composed of multiple service we can
-decide to use different technologies inside each one.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Resilience&lt;/strong&gt;: if one of system component failed you can isolate it and your
-system should operate normally.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Scaling&lt;/strong&gt;: with a large monolithic app you must scale everything as one piece
+* **Technology Heterogeneity**: with system composed of multiple service we can
+decide to use different technologies inside each one.
+* **Resilience**: if one of system component failed you can isolate it and your
+system should operate normally.
+* **Scaling**: with a large monolithic app you must scale everything as one piece
 on the other hand with a small services you can just scale that small service
-that needs a scaling.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Ease of deployment&lt;/strong&gt;: with microservices you can change to an single service
+that needs a scaling.
+* **Ease of deployment**: with microservices you can change to an single service
 and deploy it independently of the rest of the system this means faster
 deployment, lower risk than deployment in a monolithic app which means a
 one-line change requires the whole system to be deployed in order to release the
-change.&lt;/li&gt;
-  &lt;li&gt;**Organizational alignment: **microservices helps you to have better align our
+change.
+* **Organizational alignment: **microservices helps you to have better align our
 architecture to your organization, by minimizing the number of people working on
-any one codebase to hit the sweet spot of team size and productivity.&lt;/li&gt;
-  &lt;li&gt;**Optimizing for replaceability: **with our individual services being small in
+any one codebase to hit the sweet spot of team size and productivity.
+* **Optimizing for replaceability: **with our individual services being small in
 size the cost to replace them with a better implementation is much easier to
-mange.&lt;/li&gt;
-&lt;/ul&gt;
+mange.
 
-&lt;p&gt;This blog is my notes on chapter 1 from &lt;a href=&quot;http://shop.oreilly.com/product/0636920033158.do&quot;&gt;Building microservices book for sam
-newman&lt;/a&gt; and it’s a part of my
-blog series discuss microservice architecture.&lt;/p&gt;</content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">Symfony Performance Logger</title><link href="/2019/06/27/symfony-performance-logger.html" rel="alternate" type="text/html" title="Symfony Performance Logger" /><published>2019-06-27T00:00:00-05:00</published><updated>2019-06-27T00:00:00-05:00</updated><id>/2019/06/27/symfony-performance-logger</id><content type="html" xml:base="/2019/06/27/symfony-performance-logger.html">&lt;h3 id=&quot;performance-logger-on-producation-&quot;&gt;Performance Logger ON Producation !&lt;/h3&gt;
+This blog is my notes on chapter 1 from [Building microservices book for sam
+newman](http://shop.oreilly.com/product/0636920033158.do) and it’s a part of my
+blog series discuss microservice architecture.</content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">Symfony Performance Logger</title><link href="http://0.0.0.0:4000/2019/06/27/symfony-performance-logger.html" rel="alternate" type="text/html" title="Symfony Performance Logger" /><published>2019-06-27T00:00:00-05:00</published><updated>2019-06-27T00:00:00-05:00</updated><id>http://0.0.0.0:4000/2019/06/27/symfony-performance-logger</id><content type="html" xml:base="http://0.0.0.0:4000/2019/06/27/symfony-performance-logger.html">### Performance Logger ON Producation !
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Doctrine&lt;/code&gt; already ships with an awesome logger. Symfony enables that logger on dev mode the doctrine tab that we see on the profile comes from logger itself Symfony just display it.&lt;/p&gt;
+`Doctrine` already ships with an awesome logger. Symfony enables that logger on dev mode the doctrine tab that we see on the profile comes from logger itself Symfony just display it.
 
-&lt;h4 id=&quot;how-to-use-the-logger-on-production&quot;&gt;How to use the logger on production?&lt;/h4&gt;
+#### How to use the logger on production?
 
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;We should set the profiling option to enable &lt;code class=&quot;highlighter-rouge&quot;&gt;Doctrine\DBAL\Logging\DebugStack&lt;/code&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;After &lt;code class=&quot;highlighter-rouge&quot;&gt;kernel.terminate&lt;/code&gt; event fired we can use &lt;code class=&quot;highlighter-rouge&quot;&gt;DebugStack&lt;/code&gt;.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
+- We should set the profiling option to enable `Doctrine\DBAL\Logging\DebugStack`
 
-&lt;p&gt;Here’s a PerformanceLog.&lt;/p&gt;
+- After `kernel.terminate` event fired we can use `DebugStack`.
 
-&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+Here's a PerformanceLog.
 
-&lt;span class=&quot;k&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Aqarmap\Bundle\MainBundle\EventListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+```php
+&lt;?php
 
-&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Aqarmap\Bundle\MainBundle\Document\PerformanceLog&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Doctrine\DBAL\Logging\DebugStack&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Doctrine\ODM\MongoDB\DocumentManager&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;JMS\DiExtraBundle\Annotation&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;DI&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Symfony\Component\HttpKernel\Event\PostResponseEvent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+namespace Aqarmap\Bundle\MainBundle\EventListener;
 
-&lt;span class=&quot;sd&quot;&gt;/**
+use Aqarmap\Bundle\MainBundle\Document\PerformanceLog;
+use Doctrine\DBAL\Logging\DebugStack;
+use Doctrine\ODM\MongoDB\DocumentManager;
+use JMS\DiExtraBundle\Annotation as DI;
+use Symfony\Component\HttpKernel\Event\PostResponseEvent;
+
+/**
  * @DI\Service(&quot;aqarmap.performance.listener&quot;)
  * @DI\Tag(&quot;kernel.event_listener&quot;, attributes = {
  *  &quot;event&quot;=&quot;kernel.terminate&quot;,
  *  &quot;method&quot;=&quot;handel&quot;
  * })
- */&lt;/span&gt;
+ */
 
-&lt;span class=&quot;k&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;PerformanceListener&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;sd&quot;&gt;/**
+final class PerformanceListener
+{
+    /**
      *
      * @var DebugStack
-     */&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$debugStack&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+     */
+    private $debugStack;
 
-    &lt;span class=&quot;sd&quot;&gt;/**
+    /**
      *
      * @var DocumentManager
-     */&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$documentManager&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+     */
+    private $documentManager;
 
-    &lt;span class=&quot;sd&quot;&gt;/**
+    /**
      *
      * @var array
-     */&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+     */
+    private $config;
 
-    &lt;span class=&quot;sd&quot;&gt;/**
+    /**
      * @DI\InjectParams({
      *      &quot;debugStack&quot; = @DI\Inject(&quot;doctrine.dbal.logger.profiling.default&quot;),
      *      &quot;documentManager&quot; = @DI\Inject(&quot;doctrine_mongodb.odm.default_document_manager&quot;),
@@ -325,408 +545,389 @@ blog series discuss microservice architecture.&lt;/p&gt;</content><author><name>
      * @param DebugStack $debugStack
      * @param DocumentManager $documentManager
      * @param array $config
-     */&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;__construct&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;DebugStack&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$debugStack&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;DocumentManager&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$documentManager&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;array&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;debugStack&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$debugStack&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;documentManager&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$documentManager&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;config&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+     */
+    public function __construct(DebugStack $debugStack, DocumentManager $documentManager, array $config)
+    {
+        $this-&gt;debugStack = $debugStack;
+        $this-&gt;documentManager = $documentManager;
+        $this-&gt;config = $config;
+    }
 
-    &lt;span class=&quot;sd&quot;&gt;/**
+    /**
      *
      * @param PostResponseEvent $event
      * @return void
-     */&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;handel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;PostResponseEvent&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'enabled'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+     */
+    public function handel(PostResponseEvent $event)
+    {
+        if (!$this-&gt;config['enabled']) {
+            return;
+        }
 
-        &lt;span class=&quot;nv&quot;&gt;$queries&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;debugStack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;queries&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$request&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$event&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getRequest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$log&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;PerformanceLog&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+        $queries = $this-&gt;debugStack-&gt;queries;
+        $request = $event-&gt;getRequest();
+        $log = new PerformanceLog();
 
-        &lt;span class=&quot;nv&quot;&gt;$log&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setQueryTotalExecuationTime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;number_format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;array_sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;array_column&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$queries&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'executionMS'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$log&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setAction&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'_controller'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$log&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setUrl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getSchemeAndHttpHost&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getRequestUri&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$log&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setQueryTotalCount&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$queries&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$log&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setCreatedAt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;\Datetime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        $log-&gt;setQueryTotalExecuationTime(number_format(array_sum(array_column($queries, 'executionMS')) * 1000, 2));
+        $log-&gt;setAction($request-&gt;get('_controller'));
+        $log-&gt;setUrl($request-&gt;getSchemeAndHttpHost() . $request-&gt;getRequestUri());
+        $log-&gt;setQueryTotalCount(count($queries));
+        $log-&gt;setCreatedAt(new \Datetime);
 
-        &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;documentManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;persist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;documentManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;flush&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+        $this-&gt;documentManager-&gt;persist($log);
+        $this-&gt;documentManager-&gt;flush();
+    }
+}
+```
 
-&lt;p&gt;Now we have a performance logger that can help us to measure queries and we can also add more and more like for example HTML rendering time, Code execution time and so one&lt;/p&gt;
+Now we have a performance logger that can help us to measure queries and we can also add more and more like for example HTML rendering time, Code execution time and so one
 
-&lt;p&gt;I’ve made it totally stand alone in order to remove it later as microservice.&lt;/p&gt;
+I've made it totally stand alone in order to remove it later as microservice.
 
-&lt;p&gt;After the next release, we can start to get our hands dirty.&lt;/p&gt;</content><author><name></name></author><summary type="html">Performance Logger ON Producation !</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://user-images.githubusercontent.com/3720473/60279249-fc182000-9900-11e9-871f-f8a8d25e8aa9.png" /></entry><entry><title type="html">Sorting Issues</title><link href="/2019/06/02/problem-solving.html" rel="alternate" type="text/html" title="Sorting Issues" /><published>2019-06-02T00:00:00-05:00</published><updated>2019-06-02T00:00:00-05:00</updated><id>/2019/06/02/problem-solving</id><content type="html" xml:base="/2019/06/02/problem-solving.html">&lt;p&gt;As long as this issue one of the highest and oldest one let me describe it in details.&lt;/p&gt;
+After the next release, we can start to get our hands dirty.</content><author><name></name></author><summary type="html">Performance Logger ON Producation !</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://user-images.githubusercontent.com/3720473/60279249-fc182000-9900-11e9-871f-f8a8d25e8aa9.png" /></entry><entry><title type="html">Sorting Issues</title><link href="http://0.0.0.0:4000/2019/06/02/problem-solving.html" rel="alternate" type="text/html" title="Sorting Issues" /><published>2019-06-02T00:00:00-05:00</published><updated>2019-06-02T00:00:00-05:00</updated><id>http://0.0.0.0:4000/2019/06/02/problem-solving</id><content type="html" xml:base="http://0.0.0.0:4000/2019/06/02/problem-solving.html">As long as this issue one of the highest and oldest one let me describe it in details.
 
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Sorting&lt;/th&gt;
-      &lt;th&gt;View ES&lt;/th&gt;
-      &lt;th&gt;Api ES&lt;/th&gt;
-      &lt;th&gt;View MySql&lt;/th&gt;
-      &lt;th&gt;Api MySql&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Price asc&lt;/td&gt;
-      &lt;td&gt;✓&lt;/td&gt;
-      &lt;td&gt;✓&lt;/td&gt;
-      &lt;td&gt;✓&lt;/td&gt;
-      &lt;td&gt;✓&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Price desc&lt;/td&gt;
-      &lt;td&gt;✓&lt;/td&gt;
-      &lt;td&gt;✗&lt;/td&gt;
-      &lt;td&gt;✓&lt;/td&gt;
-      &lt;td&gt;✓&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Area asc&lt;/td&gt;
-      &lt;td&gt;✓&lt;/td&gt;
-      &lt;td&gt;✓&lt;/td&gt;
-      &lt;td&gt;✓&lt;/td&gt;
-      &lt;td&gt;✓&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Area desc&lt;/td&gt;
-      &lt;td&gt;✓&lt;/td&gt;
-      &lt;td&gt;✗&lt;/td&gt;
-      &lt;td&gt;✓&lt;/td&gt;
-      &lt;td&gt;✓&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
+| Sorting    | View ES | Api ES | View MySql | Api MySql |
+|------------|---------|--------|------------|-----------|
+| Price asc  | ✓       | ✓      | ✓          | ✓         |
+| Price desc | ✓       | ✗      | ✓          | ✓         |
+| Area asc   | ✓       | ✓      | ✓          | ✓         |
+| Area desc  | ✓       | ✗      | ✓          | ✓         |
 
-&lt;p&gt;​As we notice issue with &lt;code class=&quot;highlighter-rouge&quot;&gt;desc&lt;/code&gt; something really weird a little bit after digging into code for a good bit of time I catch the error here it is.&lt;/p&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;FOS\ElasticaBundle\Subscriber\PaginateElasticaQuerySubscriber@getSortDirection&lt;/code&gt;​&lt;/p&gt;
+​As we notice issue with `desc` something really weird a little bit after digging into code for a good bit of time I catch the error here it is.
 
-&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getSortDirection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$sortField&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;array&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$options&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[])&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;$dir&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'asc'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;$sortDirection&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getRequest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'sortDirectionParameterName'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+`FOS\ElasticaBundle\Subscriber\PaginateElasticaQuerySubscriber@getSortDirection`​
 
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;empty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$sortDirection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;isset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'defaultSortDirection'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$sortDirection&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'defaultSortDirection'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;It redefines Sort depending on query string searching for parameter with name as we define in config in or case &lt;code class=&quot;highlighter-rouge&quot;&gt;direction&lt;/code&gt; &lt;strong&gt;api request passes &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;amp;orderDirection=&lt;/code&gt; instead of &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;amp;direction=&lt;/code&gt;&lt;/strong&gt; so it reset direction to the default one &lt;code class=&quot;highlighter-rouge&quot;&gt;asc&lt;/code&gt;.&lt;/p&gt;
+```php?start_inline=true
+protected function getSortDirection($sortField, array $options = [])
+{
+    $dir = 'asc';
+    $sortDirection = $this-&gt;getRequest()-&gt;get($options['sortDirectionParameterName']);
 
-&lt;p&gt;We could fix that issues simply by just adding parameter with name &lt;code class=&quot;highlighter-rouge&quot;&gt;direction&lt;/code&gt; :)&lt;/p&gt;
+    if (empty($sortDirection) &amp;&amp; isset($options['defaultSortDirection'])) {
+        $sortDirection = $options['defaultSortDirection'];
+    }
+    ...
+}
+```
+It redefines Sort depending on query string searching for parameter with name as we define in config in or case `direction` **api request passes `&amp;orderDirection=` instead of `&amp;direction=`** so it reset direction to the default one `asc`.
 
-&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// VERY IMPORTANT&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;query&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-    &lt;span class=&quot;s1&quot;&gt;'direction'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;$request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;query&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'orderDirection'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">As long as this issue one of the highest and oldest one let me describe it in details.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/images/posts/api-sorting-issues.png" /></entry><entry><title type="html">Symfony Notification Part1</title><link href="/2019/06/01/symfony-notification-walking-skeleton.html" rel="alternate" type="text/html" title="Symfony Notification Part1" /><published>2019-06-01T00:00:00-05:00</published><updated>2019-06-01T00:00:00-05:00</updated><id>/2019/06/01/symfony-notification-walking-skeleton</id><content type="html" xml:base="/2019/06/01/symfony-notification-walking-skeleton.html">&lt;h3 id=&quot;create-notification&quot;&gt;Create Notification&lt;/h3&gt;
+We could fix that issues simply by just adding parameter with name `direction` :)
 
-&lt;p&gt;We serve as a great way to decouple various aspect of notification and channels since each one of them is a detached class which provides a low coupling for reliable, scalable, and maintainable system.&lt;/p&gt;
+```php?start_inline=true
+// VERY IMPORTANT
+$request-&gt;query-&gt;set(
+    'direction',
+    $request-&gt;query-&gt;get('orderDirection')
+);
+```</content><author><name></name></author><summary type="html">As long as this issue one of the highest and oldest one let me describe it in details.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://0.0.0.0:4000/images/posts/api-sorting-issues.png" /></entry><entry><title type="html">Symfony Notification Part1</title><link href="http://0.0.0.0:4000/2019/06/01/symfony-notification-walking-skeleton.html" rel="alternate" type="text/html" title="Symfony Notification Part1" /><published>2019-06-01T00:00:00-05:00</published><updated>2019-06-01T00:00:00-05:00</updated><id>http://0.0.0.0:4000/2019/06/01/symfony-notification-walking-skeleton</id><content type="html" xml:base="http://0.0.0.0:4000/2019/06/01/symfony-notification-walking-skeleton.html">### Create Notification
 
-&lt;p&gt;You can manually creating new Notifcation or via command that will generat boilerplate.&lt;/p&gt;
+We serve as a great way to decouple various aspect of notification and channels since each one of them is a detached class which provides a low coupling for reliable, scalable, and maintainable system.
 
-&lt;p&gt;For example &lt;code class=&quot;highlighter-rouge&quot;&gt;aqarmap make:notification NewListing&lt;/code&gt; it will generate NewListing notification with boilerplate inside &lt;code class=&quot;highlighter-rouge&quot;&gt;Aqarmap\NotificationBundle\Notifications&lt;/code&gt;.&lt;/p&gt;
+You can manually creating new Notifcation or via command that will generat boilerplate.
 
-&lt;p&gt;After creating notification class you can define configration via configration file.&lt;/p&gt;
+For example `aqarmap make:notification NewListing` it will generate NewListing notification with boilerplate inside `Aqarmap\NotificationBundle\Notifications`.
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;notifications.yml&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;NewListing&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Aqarmap\NotificationBundle\Notifications\NewListing&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;channel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'sms'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'database'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'mail'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;queue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'sms'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'database'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'mail'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Or inside class.
-&lt;code class=&quot;highlighter-rouge&quot;&gt;NewListing.php&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;sd&quot;&gt;/**
+After creating notification class you can define configration via configration file.
+
+`notifications.yml`
+```php?start_inline=true
+NewListing:
+    class: Aqarmap\NotificationBundle\Notifications\NewListing
+    channel: ['sms', 'database', 'mail']
+    queue: ['sms', 'database', 'mail']
+```
+Or inside class.
+`NewListing.php`
+```php?start_inline=true
+/**
 * List of channels
 *
 * @var array
-*/&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$channel&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'database'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+*/
+public $channel = ['database'];
 
-&lt;span class=&quot;sd&quot;&gt;/**
+/**
 * List of queues
 *
 * @var array
-*/&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$queue&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[];&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+*/
+public $queue = [];
+```
 
-&lt;p&gt;We also provides a simple queue implementation, allowing you to asynchronous sending for particular channel by define queue for example&lt;/p&gt;
+We also provides a simple queue implementation, allowing you to asynchronous sending for particular channel by define queue for example
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;notifications.yml&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;NewListing&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Aqarmap\NotificationBundle\Notifications\NewListing&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;channel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'sms'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'database'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'mail'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;queue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'mail'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Or inside class &lt;code class=&quot;highlighter-rouge&quot;&gt;NewListing.php&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;sd&quot;&gt;/**
+`notifications.yml`
+```php?start_inline=true
+NewListing:
+    class: Aqarmap\NotificationBundle\Notifications\NewListing
+    channel: ['sms', 'database', 'mail']
+    queue: ['mail']
+```
+Or inside class `NewListing.php`
+```php?start_inline=true
+/**
 * List of queues
 *
 * @var array
-*/&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$queue&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'mail'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;by default notification will send &lt;code class=&quot;highlighter-rouge&quot;&gt;synchronize&lt;/code&gt; here’s we defiend &lt;code class=&quot;highlighter-rouge&quot;&gt;mail&lt;/code&gt; to be &lt;code class=&quot;highlighter-rouge&quot;&gt;asynchronous&lt;/code&gt;&lt;/p&gt;
+*/
+public $queue = ['mail'];
+```
+by default notification will send `synchronize` here's we defiend `mail` to be `asynchronous`
 
-&lt;h3 id=&quot;create-channel&quot;&gt;Create Channel&lt;/h3&gt;
+### Create Channel
 
-&lt;p&gt;Since each channel is a detached we provides out of the box &lt;code class=&quot;highlighter-rouge&quot;&gt;Mail&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;DataBase&lt;/code&gt;channels you can add more channels such as telegram, facebook, twitter and so on.
-all channels is stored in &lt;code class=&quot;highlighter-rouge&quot;&gt;Aqarmap\NotificationBundle\Channels&lt;/code&gt; namespace.&lt;/p&gt;
+Since each channel is a detached we provides out of the box `Mail` and `DataBase`channels you can add more channels such as telegram, facebook, twitter and so on.
+all channels is stored in `Aqarmap\NotificationBundle\Channels` namespace.
 
-&lt;h3 id=&quot;dispatch-notification&quot;&gt;Dispatch Notification&lt;/h3&gt;
+### Dispatch Notification
 
-&lt;p&gt;To dispatch a notification simple by running&lt;/p&gt;
-&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$manager&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ChannelManager&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$manager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$users&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$notification&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+To dispatch a notification simple by running
+```php?start_inline=true
+$manager = new ChannelManager();
+$manager-&gt;send($users, $notification);
+```
 
-&lt;p&gt;Where &lt;code class=&quot;highlighter-rouge&quot;&gt;ChannelManager&lt;/code&gt; is a factory or builder that build appropriate driver for each channel if driver not found it will throw &lt;code class=&quot;highlighter-rouge&quot;&gt;DriverNotFoundException&lt;/code&gt; where sending Notification It is done through &lt;code class=&quot;highlighter-rouge&quot;&gt;NotifictionSender&lt;/code&gt;&lt;/p&gt;
+Where `ChannelManager` is a factory or builder that build appropriate driver for each channel if driver not found it will throw `DriverNotFoundException` where sending Notification It is done through `NotifictionSender`
 
-&lt;p&gt;That’s a quick intro for notification system. Happy coding!&lt;/p&gt;
+That's a quick intro for notification system. Happy coding!
 
-&lt;h3 id=&quot;testing&quot;&gt;Testing&lt;/h3&gt;
+### Testing 
 
-&lt;p&gt;I’ve build notification bundle with testing in mind, the bundle ships with eloquent testing.&lt;/p&gt;
+I've build notification bundle with testing in mind, the bundle ships with eloquent testing.
 
-&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cm&quot;&gt;/*
+```php?start_inline=true
+/*
 * This file is part of Moonshot Project 2017.
 *
-* @author Omar Makled &amp;lt;omar.makled@aqarmap.com&amp;gt;
-*/&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Aqarmap\NotificationBundle\Tests&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Mockery&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Aqarmap\NotificationBundle\NotificationConfig&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Aqarmap\NotificationBundle\ChannelManager&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Aqarmap\NotificationBundle\NotificationSender&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Aqarmap\NotificationBundle\Tests\Notification&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Symfony\Bundle\FrameworkBundle\Test\WebTestCase&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Aqarmap\NotificationBundle\Exceptions\DriverNotFoundException&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Aqarmap\NotificationBundle\Exceptions\NotificationConfigException&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ChannelManagerTest&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;WebTestCase&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$manager&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$notification&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;tearDown&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;Mockery&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;close&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setUp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;bootKernel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$app&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;static&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$kernel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getContainer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;manager&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ChannelManager&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;notification&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Notification&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;testDriverNotFoundException&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;expectException&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;DriverNotFoundException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;expectExceptionMessage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;We don't support foo Driver&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;manager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;driver&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'foo'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;testNotificationConfigException&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;expectException&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;NotificationConfigException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;expectExceptionMessage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;We can't find config foo&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;notification&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;channel&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'sms'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'database'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'mail'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;notification&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;queue&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'mail'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;manager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getConfig&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;notification&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'foo'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;testGetConfigProperty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;notification&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;channel&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'sms'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'database'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'mail'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;notification&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;queue&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'mail'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assertEquals&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-            &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'sms'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'database'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'mail'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;manager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getConfig&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;notification&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'channel'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assertEquals&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-            &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'mail'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;manager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getConfig&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;notification&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'queue'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;testGetConfigFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$config&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;manager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getConfig&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;notification&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'channel'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;__DIR__&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'/config.yml'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assertEquals&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'sms'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'database'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'mail'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$config&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;manager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getConfig&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;notification&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'queue'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;__DIR__&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'/config.yml'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assertEquals&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'sms'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'database'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'mail'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">Create Notification</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/images/posts/symfony-notification.jpg" /></entry><entry><title type="html">Symfony Notification Part2</title><link href="/2019/06/01/digging-into-notification-step-by-step.html" rel="alternate" type="text/html" title="Symfony Notification Part2" /><published>2019-06-01T00:00:00-05:00</published><updated>2019-06-01T00:00:00-05:00</updated><id>/2019/06/01/digging-into-notification-step-by-step</id><content type="html" xml:base="/2019/06/01/digging-into-notification-step-by-step.html">&lt;h1 id=&quot;digging-into-notification-step-by-step&quot;&gt;Digging into notification step by step:&lt;/h1&gt;
+* @author Omar Makled &lt;omar.makled@aqarmap.com&gt;
+*/
+namespace Aqarmap\NotificationBundle\Tests;
+use Mockery;
+use Aqarmap\NotificationBundle\NotificationConfig;
+use Aqarmap\NotificationBundle\ChannelManager;
+use Aqarmap\NotificationBundle\NotificationSender;
+use Aqarmap\NotificationBundle\Tests\Notification;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Aqarmap\NotificationBundle\Exceptions\DriverNotFoundException;
+use Aqarmap\NotificationBundle\Exceptions\NotificationConfigException;
+class ChannelManagerTest extends WebTestCase
+{
+    protected $manager;
+    protected $notification;
+    public function tearDown()
+    {
+        Mockery::close();
+    }
+    public function setUp()
+    {
+        self::bootKernel();
+        $app = static::$kernel-&gt;getContainer();
+        $this-&gt;manager = new ChannelManager($app);
+        $this-&gt;notification = new Notification();
+    }
+    public function testDriverNotFoundException()
+    {
+        $this-&gt;expectException(DriverNotFoundException::class);
+        $this-&gt;expectExceptionMessage(&quot;We don't support foo Driver&quot;);
+        $this-&gt;manager-&gt;driver('foo');
+    }
+    public function testNotificationConfigException()
+    {
+        $this-&gt;expectException(NotificationConfigException::class);
+        $this-&gt;expectExceptionMessage(&quot;We can't find config foo&quot;);
+        $this-&gt;notification-&gt;channel = ['sms', 'database', 'mail'];
+        $this-&gt;notification-&gt;queue = ['mail'];
+        $this-&gt;manager-&gt;getConfig($this-&gt;notification, 'foo');
+    }
+    public function testGetConfigProperty()
+    {
+        $this-&gt;notification-&gt;channel = ['sms', 'database', 'mail'];
+        $this-&gt;notification-&gt;queue = ['mail'];
+        $this-&gt;assertEquals(
+            ['sms', 'database', 'mail'], $this-&gt;manager-&gt;getConfig($this-&gt;notification, 'channel')
+        );
+        $this-&gt;assertEquals(
+            ['mail'], $this-&gt;manager-&gt;getConfig($this-&gt;notification, 'queue')
+        );
+    }
+    public function testGetConfigFile()
+    {
+        $config = $this-&gt;manager-&gt;getConfig($this-&gt;notification, 'channel', __DIR__.'/config.yml');
+        $this-&gt;assertEquals(['sms', 'database', 'mail'], $config);
+        $config = $this-&gt;manager-&gt;getConfig($this-&gt;notification, 'queue', __DIR__.'/config.yml');
+        $this-&gt;assertEquals(['sms', 'database', 'mail'], $config);
+    }
+}
+```</content><author><name></name></author><summary type="html">Create Notification</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://0.0.0.0:4000/images/posts/symfony-notification.jpg" /></entry><entry><title type="html">Symfony Notification Part2</title><link href="http://0.0.0.0:4000/2019/06/01/digging-into-notification-step-by-step.html" rel="alternate" type="text/html" title="Symfony Notification Part2" /><published>2019-06-01T00:00:00-05:00</published><updated>2019-06-01T00:00:00-05:00</updated><id>http://0.0.0.0:4000/2019/06/01/digging-into-notification-step-by-step</id><content type="html" xml:base="http://0.0.0.0:4000/2019/06/01/digging-into-notification-step-by-step.html"># Digging into notification step by step:
 
-&lt;ul&gt;
-  &lt;li&gt;How to create new notification and set channels?&lt;/li&gt;
-  &lt;li&gt;How to define message?&lt;/li&gt;
-  &lt;li&gt;How to send notification?&lt;/li&gt;
-  &lt;li&gt;How to set target user or users?&lt;/li&gt;
-  &lt;li&gt;How to test on Webview?&lt;/li&gt;
-&lt;/ul&gt;
+- How to create new notification and set channels?
+- How to define message?
+- How to send notification?
+- How to set target user or users?
+- How to test on Webview?
 
-&lt;h2 id=&quot;how-to-create-new-notification-and-set-channels&quot;&gt;How to create new notification and set channels?&lt;/h2&gt;
 
-&lt;p&gt;Let’s take an example
-Go to &lt;code class=&quot;highlighter-rouge&quot;&gt;Aqarmap\Bundle\MainBundle\Notifications\Types\ListingWasPublished&lt;/code&gt;
-You will find public &lt;code class=&quot;highlighter-rouge&quot;&gt;$config&lt;/code&gt; property it tells &lt;code class=&quot;highlighter-rouge&quot;&gt;NotificationManager&lt;/code&gt; about config type.&lt;/p&gt;
-&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;sd&quot;&gt;/**
+## How to create new notification and set channels?
+
+Let's take an example
+Go to `Aqarmap\Bundle\MainBundle\Notifications\Types\ListingWasPublished`
+You will find public `$config` property it tells `NotificationManager` about config type.
+```php?start_inline=true
+/**
 * Point to config type
 *
 * @var \Aqarmap\NotificationBundle\Config\ConfigInterface
-*/&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$config&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;\Aqarmap\NotificationBundle\Config\YmlConfig&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Inside &lt;code class=&quot;highlighter-rouge&quot;&gt;src/Aqarmap/Bundle/MainBundle/Notifications/Types/config.yml&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;Notifications&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;ListingWasPublished&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Aqarmap\Bundle\MainBundle\Notifications\Types\ListingWasPublished&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;channel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Database&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Mail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;HTML&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;queue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Here is we define channels if you need to run any channle &lt;code class=&quot;highlighter-rouge&quot;&gt;async&lt;/code&gt; simply define channel inside queue&lt;/p&gt;
-&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;Notifications&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;ListingWasPublished&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Aqarmap\Bundle\MainBundle\Notifications\Types\ListingWasPublished&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;channel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Database&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Mail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;HTML&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;queue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Mail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+*/
+public $config = \Aqarmap\NotificationBundle\Config\YmlConfig::class;
+```
+Inside `src/Aqarmap/Bundle/MainBundle/Notifications/Types/config.yml`
+```php?start_inline=true
+Notifications:
+    ListingWasPublished:
+        class: Aqarmap\Bundle\MainBundle\Notifications\Types\ListingWasPublished
+        channel: [Database, Mail, HTML]
+        queue: []
+```
+Here is we define channels if you need to run any channle `async` simply define channel inside queue
+```php?start_inline=true
+Notifications:
+    ListingWasPublished:
+        class: Aqarmap\Bundle\MainBundle\Notifications\Types\ListingWasPublished
+        channel: [Database, Mail, HTML]
+        queue: [Mail]
+```
 
-&lt;h2 id=&quot;how-to-define-message&quot;&gt;How to define message?&lt;/h2&gt;
+## How to define message?
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;NotificationManager&lt;/code&gt; are looking for function prefix with &lt;code class=&quot;highlighter-rouge&quot;&gt;by&lt;/code&gt; and name of channel such as &lt;code class=&quot;highlighter-rouge&quot;&gt;byDatabase&lt;/code&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;byHTML&lt;/code&gt;&lt;/p&gt;
+`NotificationManager` are looking for function prefix with `by` and name of channel such as `byDatabase` `byHTML`
 
-&lt;p&gt;Of Course You can create simple function and return message&lt;/p&gt;
-&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;sd&quot;&gt;/**
+Of Course You can create simple function and return message
+```php?start_inline=true
+/**
 * Define the message via Database channel
 *
 * @return string
-*/&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;byDatabase&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'this message will show in webview when listing was published'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;But in our project we need to create rich message, so we use twig to render message instead of simple text.&lt;/p&gt;
-&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;sd&quot;&gt;/**
+*/
+public function byDatabase()
+{
+    return 'this message will show in webview when listing was published';
+}
+```
+But in our project we need to create rich message, so we use twig to render message instead of simple text.
+```php?start_inline=true
+/**
     * Define the message via Database channel
     *
     * @return string
-    */&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;byDatabase&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;twig&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;render&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;__DIR__&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'/views/dataBase/listing_was_published.twig'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'subject'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;subject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;as long as sending via mail and database is most common we created abstract &lt;code class=&quot;highlighter-rouge&quot;&gt;Notification&lt;/code&gt; class following naming convention to return appropriate template&lt;/p&gt;
-&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;sd&quot;&gt;/**
+    */
+public function byDatabase()
+{
+    return $this-&gt;twig-&gt;render(
+        __DIR__.'/views/dataBase/listing_was_published.twig',
+        ['subject' =&gt; $this-&gt;subject]
+    );
+}
+```
+as long as sending via mail and database is most common we created abstract `Notification` class following naming convention to return appropriate template
+```php?start_inline=true
+/**
 * Convert class name to underscore
 *
 * @return string
-*/&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;$class&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ReflectionClass&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getShortName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;$template&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;  &lt;span class=&quot;nb&quot;&gt;strtolower&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;preg_replace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'~(?&amp;lt;=\\w)([A-Z])~'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'_$1'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$class&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+*/
+public function template()
+{
+    $class = (new ReflectionClass($this))-&gt;getShortName();
+    $template =  strtolower(preg_replace('~(?&lt;=\\w)([A-Z])~', '_$1', $class));
 
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$template&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    return $template;
+}
 
-&lt;span class=&quot;sd&quot;&gt;/**
+/**
 * Define the message via Database channel
 *
 * @return string
-*/&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;byDatabase&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;twig&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;render&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;__DIR__&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'/views/dataBase/'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'.php.twig'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'subject'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;subject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+*/
+public function byDatabase()
+{
+    return $this-&gt;twig-&gt;render(
+        __DIR__.'/views/dataBase/'.$this-&gt;template().'.php.twig',
+        ['subject' =&gt; $this-&gt;subject]
+    );
+}
+```
 
-&lt;h2 id=&quot;how-to-send-notification&quot;&gt;How to send notification?&lt;/h2&gt;
+## How to send notification?
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;NotificationManager&lt;/code&gt; is define inside IOC Continer that means you can simply inside controller get new instance.&lt;/p&gt;
-&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$manager&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'notification_manager'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$manager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;LisitingWasPublished&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;But in many cases you might need to write some extra behaviours before sending notifications and to avoid massive controller We uses events.&lt;/p&gt;
+`NotificationManager` is define inside IOC Continer that means you can simply inside controller get new instance.
+```php?start_inline=true
+$manager = $this-&gt;get('notification_manager');
+$manager-&gt;send($user, new LisitingWasPublished);
+```
+But in many cases you might need to write some extra behaviours before sending notifications and to avoid massive controller We uses events.
 
-&lt;p&gt;For example when listing was published&lt;/p&gt;
+For example when listing was published
 
-&lt;p&gt;Inside &lt;code class=&quot;highlighter-rouge&quot;&gt;Aqarmap\Bundle\ListingBundle\Service\ListingManager:309&lt;/code&gt; we fire &lt;code class=&quot;highlighter-rouge&quot;&gt;listing.was.published&lt;/code&gt; event.&lt;/p&gt;
-&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;dispatcher&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;dispatch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'listing.was.published'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Listing&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$listing&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Inside &lt;code class=&quot;highlighter-rouge&quot;&gt;Aqarmap\Bundle\MainBundle\Notifications\NotificationSubscriber&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;sd&quot;&gt;/**
+Inside `Aqarmap\Bundle\ListingBundle\Service\ListingManager:309` we fire `listing.was.published` event.
+```php?start_inline=true
+$this-&gt;dispatcher-&gt;dispatch('listing.was.published', new Listing($listing));
+```
+Inside `Aqarmap\Bundle\MainBundle\Notifications\NotificationSubscriber`
+```php?start_inline=true
+/**
 * Register the listeners for the subscriber.
-*/&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getSubScribedEvents&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-        &lt;span class=&quot;s1&quot;&gt;'listing.was.published'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'onListingWasPublished'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;s1&quot;&gt;'listing.was.rejected'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'onListingWasRejected'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;s1&quot;&gt;'discussion.was.approval'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'onDiscussionWasApproval'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;s1&quot;&gt;'discussion.was.rejected'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'onDiscussionWasRejected'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+*/
+public static function getSubScribedEvents()
+{
+    return [
+        'listing.was.published' =&gt; 'onListingWasPublished',
+        'listing.was.rejected' =&gt; 'onListingWasRejected',
+        'discussion.was.approval' =&gt; 'onDiscussionWasApproval',
+        'discussion.was.rejected' =&gt; 'onDiscussionWasRejected',
+        ...
+    ];
+}
 
-&lt;span class=&quot;sd&quot;&gt;/**
+/**
 * Send notification when listing was published
 *
 * @param  \Aqarmap\Bundle\MainBundle\Notifications\Events\NotificationEvent $event
 *
 * @return void
-*/&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onListingWasPublished&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;NotificationEvent&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ListingWasPublished&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+*/
+public function onListingWasPublished(NotificationEvent $event)
+{
+    $this-&gt;send(new ListingWasPublished, $event);
+}
+```
 
-&lt;p&gt;We are planning to use different approach by using subscriber to avoid rabbits inside controller “for lack of the better word”, but now first things first&lt;/p&gt;
+We are planning to use different approach by using subscriber to avoid rabbits inside controller &quot;for lack of the better word&quot;, but now first things first
 
-&lt;h2 id=&quot;how-to-set-target-user-or-users&quot;&gt;How to set target user or users?&lt;/h2&gt;
+## How to set target user or users?
 
-&lt;p&gt;We use events to&lt;/p&gt;
+We use events to
 
-&lt;ul&gt;
-  &lt;li&gt;avoid massive controller&lt;/li&gt;
-  &lt;li&gt;preparation before sending notification&lt;/li&gt;
-&lt;/ul&gt;
+- avoid massive controller
+- preparation before sending notification
 
-&lt;p&gt;Inside event we set user or users who will get noitification&lt;/p&gt;
+Inside event we set user or users who will get noitification
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Aqarmap\Bundle\MainBundle\Notifications\Events\Listing&lt;/code&gt;&lt;/p&gt;
+`Aqarmap\Bundle\MainBundle\Notifications\Events\Listing`
 
-&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;sd&quot;&gt;/**
+```php?start_inline=true
+/**
 * Get user instance
 *
 * @return \Aqarmap\Bundle\UserBundle\Entity\User
-*/&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getUser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;listing&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getUser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+*/
+public function getUser()
+{
+    return $this-&gt;listing-&gt;getUser();
+}
+```
 
-&lt;h2 id=&quot;how-to-test-on-webview&quot;&gt;How to test on Webview?&lt;/h2&gt;
-&lt;p&gt;got to &lt;code class=&quot;highlighter-rouge&quot;&gt;/notifications/test&lt;/code&gt;&lt;/p&gt;
+## How to test on Webview?
+got to `/notifications/test`
 
-&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/3720473/32836108-6224e222-ca11-11e7-98d6-33f151863941.gif&quot; alt=&quot;nov-14-2017 03-04-00&quot; /&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">Digging into notification step by step:</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/images/posts/symfony-notification-digging-into.jpg" /></entry></feed>
+![nov-14-2017 03-04-00](https://user-images.githubusercontent.com/3720473/32836108-6224e222-ca11-11e7-98d6-33f151863941.gif)</content><author><name></name></author><summary type="html">Digging into notification step by step:</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://0.0.0.0:4000/images/posts/symfony-notification-digging-into.jpg" /></entry></feed>
