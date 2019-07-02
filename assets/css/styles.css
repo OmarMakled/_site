@@ -1048,5 +1048,5 @@ svg.icon {
   .nav a {
     text-decoration: underline; }
 
-.markdown-body ol, .markdown-body ul {
-  padding-left: 0; }
+.markdown-body ul {
+  list-style: disc; }

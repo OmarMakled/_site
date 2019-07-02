@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Creational Design Patterns PHP</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="icon" href="/assets/css/favicon.png" type="image/png">
+</head>
+
+<body>
+  <div class="container">
+    <div class="markdown-body m-b m-t">
+      <h1 id="most-common-design-patterns">Most Common Design Patterns</h1>
+
+<p>There are numerous ways to structure the code and project for your web application, and you can put as much or as little thought as you like into architecting.</p>
+
+<h2 id="creational">Creational</h2>
+
+<p>Creational design patterns are design patterns that deal with object creation mechanisms.</p>
+
+<ul>
+  <li><a href="#abstract-factory">Abstract Factory</a></li>
+  <li><a href="#static-factory">Static Factory</a></li>
+  <li><a href="#factory-method">Factory Method</a></li>
+</ul>
+
+<h3 id="abstract-factory">Abstract Factory</h3>
+
+<ul>
+  <li>Usually the created classes all implement the same interface.</li>
+  <li>The client does not care about how these objects are created.</li>
+</ul>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Factory</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">createCar</span><span class="p">()</span><span class="o">:</span> <span class="nx">Car</span>
+    <span class="p">{</span>
+        <span class="c1">// Code for creating a new car</span>
+        <span class="c1">// Finally it will return new instance of car</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nx">Car</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">createTruck</span><span class="p">()</span><span class="o">:</span> <span class="nx">Truck</span>
+    <span class="p">{</span>
+        <span class="c1">// Code for creating a new truck</span>
+        <span class="c1">// Finally it will return new instance of truck</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nx">Truck</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">interface</span> <span class="nx">Vehicle</span>
+<span class="p">{</span>
+
+<span class="p">}</span>
+<span class="k">class</span> <span class="nc">Car</span> <span class="k">implements</span> <span class="nx">Vehicle</span>
+<span class="p">{</span>
+
+<span class="p">}</span>
+<span class="k">class</span> <span class="nc">Truck</span> <span class="k">implements</span> <span class="nx">Vehicle</span>
+<span class="p">{</span>
+
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Usage</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$factory</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Factory</span><span class="p">();</span>
+ <span class="nv">$car</span> <span class="o">=</span> <span class="nv">$factory</span><span class="o">-&gt;</span><span class="na">createCar</span><span class="p">();</span>
+ <span class="nv">$truck</span> <span class="o">=</span> <span class="nv">$factory</span><span class="o">-&gt;</span><span class="na">createTruck</span><span class="p">();</span>
+</code></pre></div></div>
+
+<h3 id="static-factory">Static Factory</h3>
+
+<ul>
+  <li>Usually the created classes all implement the same interface.</li>
+  <li>The client does not care about how these objects are created.</li>
+  <li><strong><em>Uses just one static method to create all types of objects it can create.</em></strong></li>
+</ul>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Factory</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">create</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$vehicle</span><span class="p">)</span><span class="o">:</span> <span class="nx">Vehicle</span>
+    <span class="p">{</span>
+        <span class="c1">// Code for creating a new vehicle</span>
+        <span class="c1">// Finally it will return new instance of vechicle</span>
+        <span class="c1">// Or throw exception InvalidArgumentException</span>
+        <span class="k">if</span><span class="p">(</span><span class="nv">$vehicle</span> <span class="o">==</span> <span class="s1">'car'</span><span class="p">){</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nx">Car</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$vechile</span> <span class="o">==</span> <span class="s1">'truck'</span><span class="p">){</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nx">Truck</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="k">throw</span> <span class="k">new</span> <span class="nx">\InvalidArgumentException</span><span class="p">(</span><span class="s1">'Unknown format given'</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">interface</span> <span class="nx">Vehicle</span>
+<span class="p">{</span>
+
+<span class="p">}</span>
+<span class="k">class</span> <span class="nc">Car</span> <span class="k">implements</span> <span class="nx">Vehicle</span>
+<span class="p">{</span>
+
+<span class="p">}</span>
+<span class="k">class</span> <span class="nc">Truck</span> <span class="k">implements</span> <span class="nx">Vehicle</span>
+<span class="p">{</span>
+
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Usage</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Factory</span><span class="o">::</span><span class="na">build</span><span class="p">(</span><span class="s1">'car'</span><span class="p">);</span>
+<span class="nx">Factory</span><span class="o">::</span><span class="na">build</span><span class="p">(</span><span class="s1">'truck'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="factory-method">Factory Method</h3>
+
+<ul>
+  <li>Usually the created classes all implement the same interface.</li>
+  <li>The client does not care about how these objects are created.</li>
+  <li><em><strong>Relies on a subclass to implement different ways to create objects.</strong></em></li>
+</ul>
+
+<p>FactoryMethod Depends on abstractions, not concrete classes This is the real trick compared to AbstractFactory or StaticFactory.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">interface</span> <span class="nx">Factory</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">create</span><span class="p">()</span><span class="o">:</span> <span class="nx">Vehicle</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">CarFactory</span> <span class="k">implements</span> <span class="nx">Factory</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">create</span><span class="p">()</span> <span class="o">:</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nx">Car</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">TruckFactory</span> <span class="k">implements</span> <span class="nx">Factory</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">create</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nx">Truck</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">interface</span> <span class="nx">Vehicle</span>
+<span class="p">{</span>
+
+<span class="p">}</span>
+<span class="k">class</span> <span class="nc">Car</span> <span class="k">implements</span> <span class="nx">Vehicle</span>
+<span class="p">{</span>
+
+<span class="p">}</span>
+<span class="k">class</span> <span class="nc">Truck</span> <span class="k">implements</span> <span class="nx">Vehicle</span>
+<span class="p">{</span>
+
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Usage</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$factory</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CarFactory</span><span class="p">();</span>
+<span class="nv">$car</span> <span class="o">=</span> <span class="nv">$factory</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">();</span>
+</code></pre></div></div>
+
+    </div>
+    <div class="nav m-b">
+      
+      <a class="" href="/posts/testing-microservices">&laquo; Testing Microservices</a>
+      
+      <a class="" href="/">Home</a>
+      
+      <a class="" href="/posts/new-php7-features">New PHP 7 Features &raquo;</a>
+      
+    </div>
+  </div>
+</body>
+
+</html>

@@ -23,13 +23,16 @@
 <p>After creating notification class you can define configration via configration file.</p>
 
 <p><code class="highlighter-rouge">notifications.yml</code></p>
+
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">NewListing</span><span class="o">:</span>
     <span class="k">class</span><span class="err">:</span> <span class="nc">Aqarmap\NotificationBundle\Notifications\NewListing</span>
     <span class="nx">channel</span><span class="o">:</span> <span class="p">[</span><span class="s1">'sms'</span><span class="p">,</span> <span class="s1">'database'</span><span class="p">,</span> <span class="s1">'mail'</span><span class="p">]</span>
     <span class="nx">queue</span><span class="o">:</span> <span class="p">[</span><span class="s1">'sms'</span><span class="p">,</span> <span class="s1">'database'</span><span class="p">,</span> <span class="s1">'mail'</span><span class="p">]</span>
 </code></pre></div></div>
+
 <p>Or inside class.
 <code class="highlighter-rouge">NewListing.php</code></p>
+
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sd">/**
 * List of channels
 *
@@ -48,12 +51,15 @@
 <p>We also provides a simple queue implementation, allowing you to asynchronous sending for particular channel by define queue for example</p>
 
 <p><code class="highlighter-rouge">notifications.yml</code></p>
+
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">NewListing</span><span class="o">:</span>
     <span class="k">class</span><span class="err">:</span> <span class="nc">Aqarmap\NotificationBundle\Notifications\NewListing</span>
     <span class="nx">channel</span><span class="o">:</span> <span class="p">[</span><span class="s1">'sms'</span><span class="p">,</span> <span class="s1">'database'</span><span class="p">,</span> <span class="s1">'mail'</span><span class="p">]</span>
     <span class="nx">queue</span><span class="o">:</span> <span class="p">[</span><span class="s1">'mail'</span><span class="p">]</span>
 </code></pre></div></div>
+
 <p>Or inside class <code class="highlighter-rouge">NewListing.php</code></p>
+
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sd">/**
 * List of queues
 *
@@ -61,6 +67,7 @@
 */</span>
 <span class="k">public</span> <span class="nv">$queue</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'mail'</span><span class="p">];</span>
 </code></pre></div></div>
+
 <p>by default notification will send <code class="highlighter-rouge">synchronize</code> here’s we defiend <code class="highlighter-rouge">mail</code> to be <code class="highlighter-rouge">asynchronous</code></p>
 
 <h3 id="create-channel">Create Channel</h3>
@@ -71,6 +78,7 @@ all channels is stored in <code class="highlighter-rouge">Aqarmap\NotificationBu
 <h3 id="dispatch-notification">Dispatch Notification</h3>
 
 <p>To dispatch a notification simple by running</p>
+
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$manager</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ChannelManager</span><span class="p">();</span>
 <span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">(</span><span class="nv">$users</span><span class="p">,</span> <span class="nv">$notification</span><span class="p">);</span>
 </code></pre></div></div>
@@ -150,11 +158,11 @@ all channels is stored in <code class="highlighter-rouge">Aqarmap\NotificationBu
     </div>
     <div class="nav m-b">
       
-      <a class="" href="/2019/06/01/digging-into-notification-step-by-step.html">&laquo; Symfony Notification Part2</a>
+      <a class="" href="/posts/digging-into-notification-step-by-step">&laquo; Symfony Notification Part2</a>
       
       <a class="" href="/">Home</a>
       
-      <a class="" href="/2019/06/02/problem-solving.html">Sorting Issues &raquo;</a>
+      <a class="" href="/posts/problem-solving">Sorting Issues &raquo;</a>
       
     </div>
   </div>
