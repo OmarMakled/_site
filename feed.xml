@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2019-07-02T07:23:53-05:00</updated><id>/feed.xml</id><title type="html">Omar Makled</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">New PHP 7 Features</title><link href="/posts/new-php7-features.html" rel="alternate" type="text/html" title="New PHP 7 Features" /><published>2019-07-02T00:00:00-05:00</published><updated>2019-07-02T00:00:00-05:00</updated><id>/posts/new-php7-features</id><content type="html" xml:base="/posts/new-php7-features.html">&lt;h2 id=&quot;new-php-7-features&quot;&gt;New PHP 7 features&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2019-07-02T07:31:15-05:00</updated><id>/feed.xml</id><title type="html">Omar Makled</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">New PHP 7 Features</title><link href="/posts/new-php7-features.html" rel="alternate" type="text/html" title="New PHP 7 Features" /><published>2019-07-02T00:00:00-05:00</published><updated>2019-07-02T00:00:00-05:00</updated><id>/posts/new-php7-features</id><content type="html" xml:base="/posts/new-php7-features.html">&lt;h2 id=&quot;new-php-7-features&quot;&gt;New PHP 7 features&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;#scalar-type-hints&quot;&gt;Scalar type hints&lt;/a&gt;&lt;/li&gt;
@@ -378,60 +378,42 @@ For example, to create a regular function, you might write something like this:&
 
 &lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$factory&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;CarFactory&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
 &lt;span class=&quot;nv&quot;&gt;$car&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$factory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">Most Common Design Patterns</summary></entry><entry><title type="html">Notes on building microservices</title><link href="/posts/notes-on-building-microservices.html" rel="alternate" type="text/html" title="Notes on building microservices" /><published>2019-07-01T00:00:00-05:00</published><updated>2019-07-01T00:00:00-05:00</updated><id>/posts/notes-on-building-microservices</id><content type="html" xml:base="/posts/notes-on-building-microservices.html">&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/1440/1*3JKJYR37PS9JMy1gGIi0fw.jpeg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">Most Common Design Patterns</summary></entry><entry><title type="html">Git Hooks</title><link href="/posts/git-hooks-pre-commit.html" rel="alternate" type="text/html" title="Git Hooks" /><published>2019-07-01T00:00:00-05:00</published><updated>2019-07-01T00:00:00-05:00</updated><id>/posts/git-hooks-pre-commit</id><content type="html" xml:base="/posts/git-hooks-pre-commit.html">&lt;h1 id=&quot;git-hooks&quot;&gt;Git Hooks&lt;/h1&gt;
 
-&lt;p&gt;The idea of separating application into a smaller parts is nothing new, there
-are other programming paradigms which address this same concept However, recent
-technology advances coupled with an increasing expectation of integrated
-“digital experiences” have given rise to a new breed of development tools and
-techniques used to meet the needs of modern business applications.&lt;/p&gt;
+&lt;h3 id=&quot;this-pre-commit-hook-triggers-a-php-codesniffer-validation-on-only-the-added-files-youre-about-to-commit&quot;&gt;This pre-commit hook triggers a PHP CodeSniffer validation on only the Added files you’re about to commit&lt;/h3&gt;
 
-&lt;h3 id=&quot;what-are-microservices&quot;&gt;What Are Microservices?&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;A small autonomous services that works together&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;that not detailed definition let’s discuss it more&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Small&lt;/strong&gt; and focused on doing one thing well, when it comes to how small is
-small enough the smaller the service the more you maximize the benefits and the
-down sides of microservices, in a monolithic codebase it can be difficult to
-know where a change needs to be made because the codebase getting larger
-overtime, so we keep trying to ensuere code quality by creating abstraction or
-modules the drive to have related code grouped together is an important concept
-this comes to single responsibility principles, that’s why we focus our services
-boundaries on business boundaries making it obvious where code lives for a given
-piece of functionality where the service focused on an explicit boundaries.&lt;/p&gt;
-
-&lt;p&gt;**Autonomous, **it means that the microservice is a separated entity that might
-be deployed as an isolated service on platform or it might has it’s own
-operation system process.&lt;/p&gt;
-
-&lt;h3 id=&quot;key-benefits-from-microservices-architecture&quot;&gt;&lt;strong&gt;Key benefits from Microservices architecture&lt;/strong&gt;&lt;/h3&gt;
+&lt;h4 id=&quot;usage&quot;&gt;Usage&lt;/h4&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Technology Heterogeneity&lt;/strong&gt;: with system composed of multiple service we can
-decide to use different technologies inside each one.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Resilience&lt;/strong&gt;: if one of system component failed you can isolate it and your
-system should operate normally.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Scaling&lt;/strong&gt;: with a large monolithic app you must scale everything as one piece
-on the other hand with a small services you can just scale that small service
-that needs a scaling.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Ease of deployment&lt;/strong&gt;: with microservices you can change to an single service
-and deploy it independently of the rest of the system this means faster
-deployment, lower risk than deployment in a monolithic app which means a
-one-line change requires the whole system to be deployed in order to release the
-change.&lt;/li&gt;
-  &lt;li&gt;**Organizational alignment: **microservices helps you to have better align our
-architecture to your organization, by minimizing the number of people working on
-any one codebase to hit the sweet spot of team size and productivity.&lt;/li&gt;
-  &lt;li&gt;**Optimizing for replaceability: **with our individual services being small in
-size the cost to replace them with a better implementation is much easier to
-mange.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Install codesniffer &lt;code class=&quot;highlighter-rouge&quot;&gt;composer global require &quot;squizlabs/php_codesniffer=*&quot;&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Go to &lt;code class=&quot;highlighter-rouge&quot;&gt;.git/hooks/&lt;/code&gt; you will see a bunch of files ending with &lt;code class=&quot;highlighter-rouge&quot;&gt;.sample&lt;/code&gt; rename &lt;code class=&quot;highlighter-rouge&quot;&gt;pre-commit.sample&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;pre-commit&lt;/code&gt; and paste code below&lt;/p&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;This blog is my notes on chapter 1 from &lt;a href=&quot;http://shop.oreilly.com/product/0636920033158.do&quot;&gt;Building microservices book for sam
-newman&lt;/a&gt; and it’s a part of my
-blog series discuss microservice architecture.&lt;/p&gt;</content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">Software Components</title><link href="/posts/software-components.html" rel="alternate" type="text/html" title="Software Components" /><published>2019-07-01T00:00:00-05:00</published><updated>2019-07-01T00:00:00-05:00</updated><id>/posts/software-components</id><content type="html" xml:base="/posts/software-components.html">&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/1600/0*bnfIs_NW1Xz3P9r3&quot; alt=&quot;&quot; /&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/sh&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;#&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# --diff-filter=ACMR&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;STAGED_FILES_CMD&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;git diff &lt;span class=&quot;nt&quot;&gt;--cached&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--name-only&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--diff-filter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;A HEAD | &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\\\\&lt;/span&gt;.php&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Running Code Sniffer. Code standard PSR2.&quot;&lt;/span&gt;
+
+phpcs &lt;span class=&quot;nt&quot;&gt;--standard&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;PSR2 &lt;span class=&quot;nt&quot;&gt;--encoding&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;utf-8 &lt;span class=&quot;nt&quot;&gt;--colors&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$STAGED_FILES_CMD&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$?&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; 0 &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;then
+        &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Fix the error before commit!&quot;&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;exit &lt;/span&gt;1
+    &lt;span class=&quot;k&quot;&gt;fi
+fi
+
+&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;exit&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$?&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">Git Hooks</summary></entry><entry><title type="html">Software Components</title><link href="/posts/software-components.html" rel="alternate" type="text/html" title="Software Components" /><published>2019-07-01T00:00:00-05:00</published><updated>2019-07-01T00:00:00-05:00</updated><id>/posts/software-components</id><content type="html" xml:base="/posts/software-components.html">&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/1600/0*bnfIs_NW1Xz3P9r3&quot; alt=&quot;&quot; /&gt;
 &lt;span class=&quot;figcaption_hack&quot;&gt;Photo by
 &lt;a href=&quot;https://unsplash.com/@fancycrave?utm_source=medium&amp;amp;utm_medium=referral&quot;&gt;Fancycrave&lt;/a&gt;
 on &lt;a href=&quot;https://unsplash.com?utm_source=medium&amp;amp;utm_medium=referral&quot;&gt;Unsplash&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
@@ -640,7 +622,60 @@ way to verify that each piece of code is doing its job correctly, and when it
 doesn’t you will know accurately the reason.&lt;/p&gt;
 
 &lt;p&gt;The combination of different type of test strategies leads to more code coverage
-that help you to find edge cases that we need to handle in our actual code.&lt;/p&gt;</content><author><name></name></author><summary type="html">A microservice architecture involves many moving parts with different guarantees and failure modes, testing these systems is more challenging than testing traditional monolithic application. an effective test strategy needs to account for testing individual services in isolation and the verification of overall system behaviour.</summary></entry><entry><title type="html">Symfony Performance Logger</title><link href="/posts/symfony-performance-logger.html" rel="alternate" type="text/html" title="Symfony Performance Logger" /><published>2019-06-27T00:00:00-05:00</published><updated>2019-06-27T00:00:00-05:00</updated><id>/posts/symfony-performance-logger</id><content type="html" xml:base="/posts/symfony-performance-logger.html">&lt;h3 id=&quot;performance-logger-on-producation-&quot;&gt;Performance Logger ON Producation !&lt;/h3&gt;
+that help you to find edge cases that we need to handle in our actual code.&lt;/p&gt;</content><author><name></name></author><summary type="html">A microservice architecture involves many moving parts with different guarantees and failure modes, testing these systems is more challenging than testing traditional monolithic application. an effective test strategy needs to account for testing individual services in isolation and the verification of overall system behaviour.</summary></entry><entry><title type="html">Notes on building microservices</title><link href="/posts/notes-on-building-microservices.html" rel="alternate" type="text/html" title="Notes on building microservices" /><published>2019-07-01T00:00:00-05:00</published><updated>2019-07-01T00:00:00-05:00</updated><id>/posts/notes-on-building-microservices</id><content type="html" xml:base="/posts/notes-on-building-microservices.html">&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/1440/1*3JKJYR37PS9JMy1gGIi0fw.jpeg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The idea of separating application into a smaller parts is nothing new, there
+are other programming paradigms which address this same concept However, recent
+technology advances coupled with an increasing expectation of integrated
+“digital experiences” have given rise to a new breed of development tools and
+techniques used to meet the needs of modern business applications.&lt;/p&gt;
+
+&lt;h3 id=&quot;what-are-microservices&quot;&gt;What Are Microservices?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;A small autonomous services that works together&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;that not detailed definition let’s discuss it more&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Small&lt;/strong&gt; and focused on doing one thing well, when it comes to how small is
+small enough the smaller the service the more you maximize the benefits and the
+down sides of microservices, in a monolithic codebase it can be difficult to
+know where a change needs to be made because the codebase getting larger
+overtime, so we keep trying to ensuere code quality by creating abstraction or
+modules the drive to have related code grouped together is an important concept
+this comes to single responsibility principles, that’s why we focus our services
+boundaries on business boundaries making it obvious where code lives for a given
+piece of functionality where the service focused on an explicit boundaries.&lt;/p&gt;
+
+&lt;p&gt;**Autonomous, **it means that the microservice is a separated entity that might
+be deployed as an isolated service on platform or it might has it’s own
+operation system process.&lt;/p&gt;
+
+&lt;h3 id=&quot;key-benefits-from-microservices-architecture&quot;&gt;&lt;strong&gt;Key benefits from Microservices architecture&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Technology Heterogeneity&lt;/strong&gt;: with system composed of multiple service we can
+decide to use different technologies inside each one.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Resilience&lt;/strong&gt;: if one of system component failed you can isolate it and your
+system should operate normally.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Scaling&lt;/strong&gt;: with a large monolithic app you must scale everything as one piece
+on the other hand with a small services you can just scale that small service
+that needs a scaling.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Ease of deployment&lt;/strong&gt;: with microservices you can change to an single service
+and deploy it independently of the rest of the system this means faster
+deployment, lower risk than deployment in a monolithic app which means a
+one-line change requires the whole system to be deployed in order to release the
+change.&lt;/li&gt;
+  &lt;li&gt;**Organizational alignment: **microservices helps you to have better align our
+architecture to your organization, by minimizing the number of people working on
+any one codebase to hit the sweet spot of team size and productivity.&lt;/li&gt;
+  &lt;li&gt;**Optimizing for replaceability: **with our individual services being small in
+size the cost to replace them with a better implementation is much easier to
+mange.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This blog is my notes on chapter 1 from &lt;a href=&quot;http://shop.oreilly.com/product/0636920033158.do&quot;&gt;Building microservices book for sam
+newman&lt;/a&gt; and it’s a part of my
+blog series discuss microservice architecture.&lt;/p&gt;</content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">Symfony Performance Logger</title><link href="/posts/symfony-performance-logger.html" rel="alternate" type="text/html" title="Symfony Performance Logger" /><published>2019-06-27T00:00:00-05:00</published><updated>2019-06-27T00:00:00-05:00</updated><id>/posts/symfony-performance-logger</id><content type="html" xml:base="/posts/symfony-performance-logger.html">&lt;h3 id=&quot;performance-logger-on-producation-&quot;&gt;Performance Logger ON Producation !&lt;/h3&gt;
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Doctrine&lt;/code&gt; already ships with an awesome logger. Symfony enables that logger on dev mode the doctrine tab that we see on the profile comes from logger itself Symfony just display it.&lt;/p&gt;
 

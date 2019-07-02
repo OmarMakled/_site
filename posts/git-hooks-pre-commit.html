@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Git Hooks</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="icon" href="/assets/css/favicon.png" type="image/png">
+</head>
+
+<body>
+  <div class="container">
+    <div class="markdown-body m-b m-t">
+      <h1 id="git-hooks">Git Hooks</h1>
+
+<h3 id="this-pre-commit-hook-triggers-a-php-codesniffer-validation-on-only-the-added-files-youre-about-to-commit">This pre-commit hook triggers a PHP CodeSniffer validation on only the Added files you’re about to commit</h3>
+
+<h4 id="usage">Usage</h4>
+
+<ul>
+  <li>
+    <p>Install codesniffer <code class="highlighter-rouge">composer global require "squizlabs/php_codesniffer=*"</code></p>
+  </li>
+  <li>
+    <p>Go to <code class="highlighter-rouge">.git/hooks/</code> you will see a bunch of files ending with <code class="highlighter-rouge">.sample</code> rename <code class="highlighter-rouge">pre-commit.sample</code> to <code class="highlighter-rouge">pre-commit</code> and paste code below</p>
+  </li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/sh</span>
+
+<span class="c">#</span>
+<span class="c"># --diff-filter=ACMR</span>
+<span class="c">#</span>
+
+<span class="nv">STAGED_FILES_CMD</span><span class="o">=</span><span class="sb">`</span>git diff <span class="nt">--cached</span> <span class="nt">--name-only</span> <span class="nt">--diff-filter</span><span class="o">=</span>A HEAD | <span class="nb">grep</span> <span class="se">\\\\</span>.php<span class="sb">`</span>
+
+<span class="nb">echo</span> <span class="s2">"Running Code Sniffer. Code standard PSR2."</span>
+
+phpcs <span class="nt">--standard</span><span class="o">=</span>PSR2 <span class="nt">--encoding</span><span class="o">=</span>utf-8 <span class="nt">--colors</span> <span class="nt">-n</span> <span class="nt">-p</span> <span class="nt">-s</span> <span class="nv">$STAGED_FILES_CMD</span>
+
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> <span class="o">!=</span> 0 <span class="o">]</span>
+    <span class="k">then
+        </span><span class="nb">echo</span> <span class="s2">"Fix the error before commit!"</span>
+        <span class="nb">exit </span>1
+    <span class="k">fi
+fi
+
+</span><span class="nb">exit</span> <span class="nv">$?</span>
+</code></pre></div></div>
+
+    </div>
+    <div class="nav m-b">
+      
+      <a class="" href="/posts/symfony-performance-logger.html">&laquo; Symfony Performance Logger</a>
+      
+      <a class="" href="/">Home</a>
+      
+      <a class="" href="/posts/notes-on-building-microservices.html">Notes on building microservices &raquo;</a>
+      
+    </div>
+  </div>
+</body>
+
+</html>
