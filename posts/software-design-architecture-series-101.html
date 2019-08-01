@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Software Design Architecture Series 101</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="icon" href="/assets/css/favicon.png" type="image/png">
+</head>
+
+<body>
+  <div class="container">
+    <div class="markdown-body m-b m-t">
+      <h1 id="ui-presenter">UI Presenter:</h1>
+
+<h2 id="whats-the-problem">What’s the problem?</h2>
+
+<p>To understand the problem I’m gonna start by asking you simple questions.</p>
+
+<p><img src="https://user-images.githubusercontent.com/3720473/62218084-15066c00-b3ac-11e9-963d-06677268010b.png" alt="" /></p>
+
+<ul>
+  <li>How can you test it and make sure you are already displaying correct data?</li>
+  <li>How much does it cost to change it for the entire app?</li>
+  <li>Could you tell me which data you will display if the listing is a bumped?</li>
+</ul>
+
+<blockquote>
+  <p>That’s why As a rule of thumb the view is as dumb as possible and should not contain any logic We are trying to avoid putting logic inside view. there are a couple of main reasons.</p>
+</blockquote>
+
+<ul>
+  <li>High maintenance cost.</li>
+  <li>Hard to unit-test.</li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/3720473/62218211-4bdc8200-b3ac-11e9-9130-11f73ca64f6e.png" alt="" /></p>
+
+<p>A presenter is a UI layer that contains all presentation logic. it’s easy to test and you may have multi presenters for a single Entity.</p>
+
+<p>for example</p>
+
+<ul>
+  <li>ListingTypo1Presenter</li>
+  <li>ListingTypeo2Presenter</li>
+  <li>ListingTypeo3Presetner.</li>
+</ul>
+
+<h2 id="how-can-we-create-a-presenter">How can we create a presenter?</h2>
+
+<p><img src="https://user-images.githubusercontent.com/3720473/62218319-7fb7a780-b3ac-11e9-863d-ec1cae5a1639.png" alt="" /></p>
+
+<p>Let’s start by asking how to improve this piece of code and make it testable scalable and easy to maintain.</p>
+
+<p>I would like to add syntactic sugar and instead of all these blocks type <code class="highlighter-rouge">presenter.transaction.url</code> or <code class="highlighter-rouge">listing.present.transaction.url</code></p>
+
+<h3 id="bankrupt">Bankrupt!</h3>
+
+<p><img src="https://user-images.githubusercontent.com/3720473/62218600-0ec4bf80-b3ad-11e9-8c51-13b8289481cd.jpg" alt="" /></p>
+
+<p>We don’t wanna solve a problem by adding another problem we won’t move logic from view to put into a model that will end it up to a massive one also model should not be aware of presentation! the obesity can have some real drawbacks on the health of your project.</p>
+
+<h3 id="presenter-pattern">Presenter Pattern.</h3>
+
+<p>Well, let’s start by creating a dedicate class called Transaction inside Presenter namespace, naming convention doesn’t matter now.</p>
+
+<p>That class contains a method called url which might be later on a factory method so when things gets bigger and bigger you don’t need to change a view or break your code.</p>
+
+<p>And we also need to inject the entity as well.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">class</span> <span class="nc">Transaction</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">(</span><span class="nv">$entity</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">entity</span> <span class="o">=</span> <span class="nv">$entity</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">url</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// logic goes here</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+</code></pre></div></div>
+
+<h3 id="decorator-pattern">Decorator pattern</h3>
+
+<p>Now how to connect between both Model and Presenter it looks like inside a Model will add a new method called present</p>
+
+<p>Yes, that’s right and to make it reusable let put inside trait called PresenterTrait</p>
+
+<p>PresenterTrait.php</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="k">public</span> <span class="k">function</span> <span class="nf">present</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">presenter</span><span class="p">(</span><span class="nv">$this</span><span class="p">);</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<p>Now, when we call listing.present it returns a new instance of presenter which contains presentation logic.</p>
+
+<p>You can have multi presenters for a single Model you might be asking now where and how to set a presenter.</p>
+
+<p><img src="https://user-images.githubusercontent.com/3720473/62218782-6a8f4880-b3ad-11e9-836d-94fbc4a0362e.jpg" alt="" /></p>
+
+    </div>
+    <div class="nav m-b">
+      
+      <a class="" href="/posts/get-rid-of-conditional-statements-and-increase-performance.html">&laquo; Get rid of conditional statements and increase performance</a>
+      
+      <a class="" href="/">Home</a>
+      
+    </div>
+  </div>
+</body>
+
+</html>

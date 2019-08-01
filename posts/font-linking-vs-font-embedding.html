@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Font linking vs Font embedding</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="icon" href="/assets/css/favicon.png" type="image/png">
+</head>
+
+<body>
+  <div class="container">
+    <div class="markdown-body m-b m-t">
+      <h2 id="use-font-embedding-not-font-linking">Use font embedding, not font linking.</h2>
+
+<p>If you want to use a font on your website you can load it by linking to an external server (using CSS or JavaScript). This is common practice and you will probably know about it if you worked with Google Fonts or Adobe Typekit. This is what we call “font linking”. The alternative is that you host the font yourself and use @font-face in your CSS to load it. You will need to upload the font in several formats to your server. This self-hosted approach is also called “font embedding”.</p>
+
+<h3 id="what-is-the-difference">What is the difference?</h3>
+
+<p>With font linking you add the following HTML code to your website:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;link</span>
+  <span class="na">href=</span><span class="s">"http://fonts.googleapis.com/css?family=Open+Sans"</span>
+  <span class="na">rel=</span><span class="s">"stylesheet"</span>
+  <span class="na">type=</span><span class="s">"text/css"</span>
+<span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<p>While with font embedding you add the following CSS code:</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">@font-face</span> <span class="p">{</span>
+  <span class="nl">font-family</span><span class="p">:</span> <span class="s1">"Open Sans"</span><span class="p">;</span>
+  <span class="nl">font-style</span><span class="p">:</span> <span class="nb">normal</span><span class="p">;</span>
+  <span class="nl">font-weight</span><span class="p">:</span> <span class="m">400</span><span class="p">;</span>
+  <span class="nl">src</span><span class="p">:</span> <span class="sx">url("open-sans-latin-regular.eot")</span><span class="p">;</span> <span class="c">/* IE9 Compat Modes */</span>
+  <span class="nl">src</span><span class="p">:</span> <span class="n">local</span><span class="p">(</span><span class="s1">"Open Sans"</span><span class="p">),</span> <span class="n">local</span><span class="p">(</span><span class="s1">"OpenSans"</span><span class="p">),</span>
+    <span class="sx">url("open-sans-latin-regular.eot?#iefix")</span> <span class="n">format</span><span class="p">(</span><span class="s1">"embedded-opentype"</span><span class="p">),</span> <span class="c">/* IE6-IE8 */</span>
+      <span class="sx">url("open-sans-latin-regular.woff2")</span> <span class="n">format</span><span class="p">(</span><span class="s1">"woff2"</span><span class="p">),</span>
+    <span class="c">/* Super Modern Browsers */</span> <span class="sx">url("open-sans-latin-regular.woff")</span> <span class="n">format</span><span class="p">(</span><span class="s1">"woff"</span><span class="p">),</span>
+    <span class="c">/* Modern Browsers */</span> <span class="sx">url("open-sans-latin-regular.ttf")</span> <span class="n">format</span><span class="p">(</span><span class="s1">"truetype"</span><span class="p">),</span>
+    <span class="c">/* Safari, Android, iOS */</span> <span class="sx">url("open-sans-latin-regular.svg#OpenSans")</span>
+      <span class="n">format</span><span class="p">(</span><span class="s1">"svg"</span><span class="p">);</span> <span class="c">/* Legacy iOS */</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>As you can see it easier to link the font as you do not have to write extensive CSS and upload the 5 font files (eot, woff2, woff, ttf &amp; svg) that font embedding requires.</p>
+
+<h3 id="font-linking-is-not-allowed">Font linking is not allowed</h3>
+
+<p>Font linking does not work for offline content. It requires requests to other services, in contradiction to font embedding. Font linking may cause uptime worries, dependency issues (Great firewall of China) and leaking of Personally Identifiable Information (PII). In some countries (like the Netherlands) it is even forbidden by law to share PII (like IP address and user-agent string) without an explicit consent from the user to allow tracking. So, it is a simple choice, one would think, right?</p>
+
+<h3 id="font-embedding-is-also-not-allowed">Font embedding is also not allowed</h3>
+
+<p>Services like Fonts, MyFonts, Typekit, etc. do not allow font embedding, you need to link them. The reason: they have a “pay-per-use” business model. But isn’t it a bit strange that this type of usage (enforced by the licensing model) is actually restricted by EU privacy laws? Exception is Google Fonts as their fonts are free to use and free to embed.</p>
+
+<h3 id="self-hosted">Self-Hosted</h3>
+
+<ul>
+  <li>Go to: https://google-webfonts-helper.herokuapp.com/fonts</li>
+  <li>Select one of the 682 fonts from the menu on the left</li>
+  <li>Copy-paste presented CSS code into your stylesheet in the directory “css”</li>
+  <li>Download the zip file using the big blue button</li>
+  <li>Unzip the files and upload them to your website in the directory “fonts”</li>
+</ul>
+
+<p>if you have your own fonts and need them in such a convenient zip file, you may try <a href="http://www.fontsquirrel.com/tools/webfont-generator">webfong</a></p>
+
+    </div>
+    <div class="nav m-b">
+      
+      <a class="" href="/posts/new-php7-features.html">&laquo; New PHP 7 Features</a>
+      
+      <a class="" href="/">Home</a>
+      
+      <a class="" href="/posts/symfony3-translation.html">Symfony3 Translation &raquo;</a>
+      
+    </div>
+  </div>
+</body>
+
+</html>

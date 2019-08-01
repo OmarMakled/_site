@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Get rid of conditional statements and increase performance</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="icon" href="/assets/css/favicon.png" type="image/png">
+</head>
+
+<body>
+  <div class="container">
+    <div class="markdown-body m-b m-t">
+      <h1 id="get-rid-of-conditional-statements-and-increase-performance-">Get rid of conditional statements and increase performance :</h1>
+
+<p><img src="https://user-images.githubusercontent.com/3720473/62200001-d0b3a580-b384-11e9-8c08-8a3ae215bf97.png" alt="Screen Shot 2019-07-31 at 11 17 29 AM" /></p>
+
+<p>We keep using the same approach in the entire application this is diamond a dozen and what’s wrong?!</p>
+
+<p>Well, you can call class’s members from a string and git rid of conditional statement to make less code and improve performance.</p>
+
+<p>check the example below.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+<span class="k">namespace</span> <span class="nx">Acme</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MyClass</span> <span class="p">{</span>
+    <span class="k">const</span> <span class="no">FOO</span> <span class="o">=</span> <span class="s1">'foo'</span><span class="p">;</span>
+    <span class="k">const</span> <span class="no">BAR</span> <span class="o">=</span> <span class="s1">'bar'</span><span class="p">;</span>
+    <span class="k">const</span> <span class="no">BAZ</span> <span class="o">=</span> <span class="s1">'baz'</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">namespace</span> <span class="nx">App</span><span class="p">;</span>
+<span class="nv">$val</span> <span class="o">=</span> <span class="s1">'baz'</span><span class="p">;</span>
+
+<span class="nv">$start</span> <span class="o">=</span> <span class="nb">microtime</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+<span class="k">switch</span> <span class="p">(</span><span class="nv">$val</span><span class="p">){</span>
+    <span class="k">case</span> <span class="s1">'foo'</span><span class="o">:</span>
+        <span class="k">echo</span> <span class="nx">\Acme\MyClass</span><span class="o">::</span><span class="na">FOO</span><span class="p">;</span> 
+        <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="s1">'bar'</span><span class="o">:</span>
+        <span class="k">echo</span> <span class="nx">\Acme\MyClass</span><span class="o">::</span><span class="na">BAR</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span> 
+    <span class="k">case</span> <span class="s1">'baz'</span><span class="o">:</span>
+        <span class="k">echo</span> <span class="nx">\Acme\MyClass</span><span class="o">::</span><span class="na">BAZ</span><span class="p">;</span> 
+        <span class="k">break</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nv">$end</span> <span class="o">=</span> <span class="nb">microtime</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+
+<span class="k">echo</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">-------------</span><span class="se">\n</span><span class="s2"> execution time:"</span><span class="p">;</span>
+<span class="k">echo</span> <span class="nb">number_format</span><span class="p">(</span><span class="nv">$end</span> <span class="o">-</span> <span class="nv">$start</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="s1">'.'</span><span class="p">,</span><span class="s1">','</span><span class="p">);</span>
+<span class="k">echo</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">;</span>
+
+<span class="nv">$start</span> <span class="o">=</span> <span class="nb">microtime</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nb">constant</span><span class="p">(</span><span class="s1">'\Acme\MyClass::'</span><span class="o">.</span><span class="nb">strtoupper</span><span class="p">(</span><span class="nv">$val</span><span class="p">));</span>
+<span class="nv">$end</span> <span class="o">=</span> <span class="nb">microtime</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+
+<span class="k">echo</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">-------------</span><span class="se">\n</span><span class="s2"> execution time:"</span><span class="p">;</span>
+<span class="k">echo</span> <span class="nb">number_format</span><span class="p">(</span><span class="nv">$end</span> <span class="o">-</span> <span class="nv">$start</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="s1">'.'</span><span class="p">,</span><span class="s1">','</span><span class="p">);</span>
+<span class="k">echo</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p><img src="https://user-images.githubusercontent.com/3720473/62203615-cba62480-b38b-11e9-9ceb-0fe7ee3067cb.png" alt="Screen Shot 2019-07-31 at 11 55 21 AM" /></p>
+
+<p>Now let’s write code again to replace <code class="highlighter-rouge">30</code> lines of code with simple <code class="highlighter-rouge">1</code> line!.</p>
+
+    </div>
+    <div class="nav m-b">
+      
+      <a class="" href="/posts/symfony3-translations-php.html">&laquo; Symfony3 & Translation</a>
+      
+      <a class="" href="/">Home</a>
+      
+      <a class="" href="/posts/software-design-architecture-series-101.html">Software Design Architecture Series 101 &raquo;</a>
+      
+    </div>
+  </div>
+</body>
+
+</html>

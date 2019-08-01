@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Symfony3 Translation</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="icon" href="/assets/css/favicon.png" type="image/png">
+</head>
+
+<body>
+  <div class="container">
+    <div class="markdown-body m-b m-t">
+      <p><code class="highlighter-rouge">symfony new symfony3 3.4</code>
+<code class="highlighter-rouge">php bin/console server:run</code>
+<code class="highlighter-rouge">php bin/console doctrine:database:create</code></p>
+
+<p><code class="highlighter-rouge">php bin/console doctrine:generate:entity</code>
+<code class="highlighter-rouge">php bin/console doctrine:schema:validate</code>
+<code class="highlighter-rouge">php bin/console doctrine:schema:update --force</code></p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sd">/**
+     * @Route("/create", name="create")
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">createAction</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// you can fetch the EntityManager via $this-&gt;getDoctrine()</span>
+        <span class="c1">// or you can add an argument to your action: createAction(EntityManagerInterface $entityManager)</span>
+        <span class="nv">$entityManager</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getDoctrine</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getManager</span><span class="p">();</span>
+
+        <span class="nv">$product</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Product</span><span class="p">();</span>
+        <span class="nv">$product</span><span class="o">-&gt;</span><span class="na">setTitle</span><span class="p">(</span><span class="s1">'Keyboard'</span><span class="p">);</span>
+        <span class="nv">$product</span><span class="o">-&gt;</span><span class="na">setDescription</span><span class="p">(</span><span class="s1">'Ergonomic and stylish!'</span><span class="p">);</span>
+
+        <span class="c1">// tells Doctrine you want to (eventually) save the Product (no queries yet)</span>
+        <span class="nv">$entityManager</span><span class="o">-&gt;</span><span class="na">persist</span><span class="p">(</span><span class="nv">$product</span><span class="p">);</span>
+
+        <span class="c1">// actually executes the queries (i.e. the INSERT query)</span>
+        <span class="nv">$entityManager</span><span class="o">-&gt;</span><span class="na">flush</span><span class="p">();</span>
+
+        <span class="k">return</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="s1">'Saved new product with id '</span> <span class="o">.</span> <span class="nv">$product</span><span class="o">-&gt;</span><span class="na">getId</span><span class="p">());</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sd">/**
+     * @Route("/", name="homepage")
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">indexAction</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$repository</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getDoctrine</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getRepository</span><span class="p">(</span><span class="nx">Product</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+        <span class="nv">$products</span> <span class="o">=</span> <span class="nv">$repository</span><span class="o">-&gt;</span><span class="na">findAll</span><span class="p">();</span>
+
+        <span class="c1">// replace this example code with whatever you need</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">'default/index.html.twig'</span><span class="p">,</span> <span class="p">[</span>
+            <span class="s1">'products'</span> <span class="o">=&gt;</span> <span class="nv">$products</span><span class="p">,</span>
+        <span class="p">]);</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">    </span><span class="s2">"gedmo/doctrine-extensions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"~2.3"</span><span class="w">
+</span></code></pre></div></div>
+
+<p><code class="highlighter-rouge">composer require "gedmo/doctrine-extensions"</code></p>
+
+    </div>
+    <div class="nav m-b">
+      
+      <a class="" href="/posts/font-linking-vs-font-embedding.html">&laquo; Font linking vs Font embedding</a>
+      
+      <a class="" href="/">Home</a>
+      
+      <a class="" href="/posts/symfony3-translations-php.html">Symfony3 & Translation &raquo;</a>
+      
+    </div>
+  </div>
+</body>
+
+</html>
