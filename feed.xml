@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2019-08-01T08:39:04-05:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Omar Makled</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Software Design Architecture Series 101</title><link href="http://0.0.0.0:4000/posts/software-design-architecture-series-101.html" rel="alternate" type="text/html" title="Software Design Architecture Series 101" /><published>2019-07-31T00:00:00-05:00</published><updated>2019-07-31T00:00:00-05:00</updated><id>http://0.0.0.0:4000/posts/software-design-architecture-series-101</id><content type="html" xml:base="http://0.0.0.0:4000/posts/software-design-architecture-series-101.html">&lt;h1 id=&quot;ui-presenter&quot;&gt;UI Presenter:&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2019-08-01T09:52:49-05:00</updated><id>/feed.xml</id><title type="html">Omar Makled</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Software Design Architecture Series 101</title><link href="/posts/software-design-architecture-series-101.html" rel="alternate" type="text/html" title="Software Design Architecture Series 101" /><published>2019-07-31T00:00:00-05:00</published><updated>2019-07-31T00:00:00-05:00</updated><id>/posts/software-design-architecture-series-101</id><content type="html" xml:base="/posts/software-design-architecture-series-101.html">&lt;h1 id=&quot;ui-presenter&quot;&gt;UI Presenter:&lt;/h1&gt;
 
 &lt;h2 id=&quot;whats-the-problem&quot;&gt;What’s the problem?&lt;/h2&gt;
 
@@ -87,7 +87,7 @@
 
 &lt;p&gt;You can have multi presenters for a single Model you might be asking now where and how to set a presenter.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/3720473/62218782-6a8f4880-b3ad-11e9-836d-94fbc4a0362e.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">UI Presenter:</summary></entry><entry><title type="html">Get rid of conditional statements and increase performance</title><link href="http://0.0.0.0:4000/posts/get-rid-of-conditional-statements-and-increase-performance.html" rel="alternate" type="text/html" title="Get rid of conditional statements and increase performance" /><published>2019-07-30T00:00:00-05:00</published><updated>2019-07-30T00:00:00-05:00</updated><id>http://0.0.0.0:4000/posts/get-rid-of-conditional-statements-and-increase-performance</id><content type="html" xml:base="http://0.0.0.0:4000/posts/get-rid-of-conditional-statements-and-increase-performance.html">&lt;h1 id=&quot;get-rid-of-conditional-statements-and-increase-performance-&quot;&gt;Get rid of conditional statements and increase performance :&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/3720473/62218782-6a8f4880-b3ad-11e9-836d-94fbc4a0362e.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">UI Presenter:</summary></entry><entry><title type="html">Get rid of conditional statements and increase performance</title><link href="/posts/get-rid-of-conditional-statements-and-increase-performance.html" rel="alternate" type="text/html" title="Get rid of conditional statements and increase performance" /><published>2019-07-30T00:00:00-05:00</published><updated>2019-07-30T00:00:00-05:00</updated><id>/posts/get-rid-of-conditional-statements-and-increase-performance</id><content type="html" xml:base="/posts/get-rid-of-conditional-statements-and-increase-performance.html">&lt;h1 id=&quot;get-rid-of-conditional-statements-and-increase-performance-&quot;&gt;Get rid of conditional statements and increase performance :&lt;/h1&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/3720473/62200001-d0b3a580-b384-11e9-8c08-8a3ae215bf97.png&quot; alt=&quot;Screen Shot 2019-07-31 at 11 17 29 AM&quot; /&gt;&lt;/p&gt;
 
@@ -138,7 +138,7 @@
 
 &lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/3720473/62203615-cba62480-b38b-11e9-9ceb-0fe7ee3067cb.png&quot; alt=&quot;Screen Shot 2019-07-31 at 11 55 21 AM&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Now let’s write code again to replace &lt;code class=&quot;highlighter-rouge&quot;&gt;30&lt;/code&gt; lines of code with simple &lt;code class=&quot;highlighter-rouge&quot;&gt;1&lt;/code&gt; line!.&lt;/p&gt;</content><author><name></name></author><summary type="html">Get rid of conditional statements and increase performance :</summary></entry><entry><title type="html">Symfony3 &amp;amp; Translation</title><link href="http://0.0.0.0:4000/posts/symfony3-translations-php.html" rel="alternate" type="text/html" title="Symfony3 &amp; Translation" /><published>2019-07-06T00:00:00-05:00</published><updated>2019-07-06T00:00:00-05:00</updated><id>http://0.0.0.0:4000/posts/symfony3-translations-php</id><content type="html" xml:base="http://0.0.0.0:4000/posts/symfony3-translations-php.html">&lt;h1 id=&quot;symfony3--translation&quot;&gt;Symfony3 &amp;amp; Translation&lt;/h1&gt;
+&lt;p&gt;Now let’s write code again to replace &lt;code class=&quot;highlighter-rouge&quot;&gt;30&lt;/code&gt; lines of code with simple &lt;code class=&quot;highlighter-rouge&quot;&gt;1&lt;/code&gt; line!.&lt;/p&gt;</content><author><name></name></author><summary type="html">Get rid of conditional statements and increase performance :</summary></entry><entry><title type="html">Symfony3 &amp;amp; Translation</title><link href="/posts/symfony3-translations-php.html" rel="alternate" type="text/html" title="Symfony3 &amp; Translation" /><published>2019-07-06T00:00:00-05:00</published><updated>2019-07-06T00:00:00-05:00</updated><id>/posts/symfony3-translations-php</id><content type="html" xml:base="/posts/symfony3-translations-php.html">&lt;h1 id=&quot;symfony3--translation&quot;&gt;Symfony3 &amp;amp; Translation&lt;/h1&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/3720473/60767556-003efd00-a0ba-11e9-8527-bed048875101.png&quot; alt=&quot;Screen Shot 2019-07-07 at 12 19 10 PM&quot; /&gt;&lt;/p&gt;
 
@@ -247,56 +247,7 @@ php bin/console server:start
 &lt;p&gt;Notice how translation bundel fetch data using &lt;code class=&quot;highlighter-rouge&quot;&gt;LEFT JOIN&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;COALESCE&lt;/code&gt;.&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;SELECT p0_.id AS id_0, COALESCE(t1_.content, p0_.title) AS title_1, COALESCE(t2_.content, p0_.description) AS description_2, a3_.id AS id_3, COALESCE(t4_.content, a3_.firstname) AS firstname_4, COALESCE(t5_.content, a3_.lastname) AS lastname_5, COALESCE(t6_.content, a3_.address) AS address_6, COALESCE(t7_.content, a3_.country) AS country_7, c8_.id AS id_8, COALESCE(t9_.content, c8_.title) AS title_9, COALESCE(t10_.content, c8_.description) AS description_10, u11_.id AS id_11, u11_.email AS email_12, p0_.author_id AS author_id_13, p0_.category_id AS category_id_14, a3_.user_id AS user_id_15 FROM post p0_ INNER JOIN author a3_ ON p0_.author_id = a3_.id INNER JOIN category c8_ ON p0_.category_id = c8_.id INNER JOIN user u11_ ON a3_.user_id = u11_.id LEFT JOIN post_translations t1_ ON t1_.locale = 'ar' AND t1_.field = 'title' AND t1_.object_id = p0_.id LEFT JOIN post_translations t2_ ON t2_.locale = 'ar' AND t2_.field = 'description' AND t2_.object_id = p0_.id LEFT JOIN author_translations t4_ ON t4_.locale = 'ar' AND t4_.field = 'firstname' AND t4_.object_id = a3_.id LEFT JOIN author_translations t5_ ON t5_.locale = 'ar' AND t5_.field = 'lastname' AND t5_.object_id = a3_.id LEFT JOIN author_translations t6_ ON t6_.locale = 'ar' AND t6_.field = 'address' AND t6_.object_id = a3_.id LEFT JOIN author_translations t7_ ON t7_.locale = 'ar' AND t7_.field = 'country' AND t7_.object_id = a3_.id LEFT JOIN category_translations t9_ ON t9_.locale = 'ar' AND t9_.field = 'title' AND t9_.object_id = c8_.id LEFT JOIN category_translations t10_ ON t10_.locale = 'ar' AND t10_.field = 'description' AND t10_.object_id = c8_.id;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">Symfony3 &amp;amp; Translation</summary></entry><entry><title type="html">Symfony3 Translation</title><link href="http://0.0.0.0:4000/posts/symfony3-translation.html" rel="alternate" type="text/html" title="Symfony3 Translation" /><published>2019-07-04T00:00:00-05:00</published><updated>2019-07-04T00:00:00-05:00</updated><id>http://0.0.0.0:4000/posts/symfony3-translation</id><content type="html" xml:base="http://0.0.0.0:4000/posts/symfony3-translation.html">&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;symfony new symfony3 3.4&lt;/code&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;php bin/console server:run&lt;/code&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;php bin/console doctrine:database:create&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;php bin/console doctrine:generate:entity&lt;/code&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;php bin/console doctrine:schema:validate&lt;/code&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;php bin/console doctrine:schema:update --force&lt;/code&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;sd&quot;&gt;/**
-     * @Route(&quot;/create&quot;, name=&quot;create&quot;)
-     */&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;createAction&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;// you can fetch the EntityManager via $this-&amp;gt;getDoctrine()&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;// or you can add an argument to your action: createAction(EntityManagerInterface $entityManager)&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$entityManager&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getDoctrine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getManager&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-
-        &lt;span class=&quot;nv&quot;&gt;$product&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Product&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$product&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setTitle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Keyboard'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$product&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setDescription&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Ergonomic and stylish!'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-        &lt;span class=&quot;c1&quot;&gt;// tells Doctrine you want to (eventually) save the Product (no queries yet)&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$entityManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;persist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$product&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-        &lt;span class=&quot;c1&quot;&gt;// actually executes the queries (i.e. the INSERT query)&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$entityManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;flush&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Saved new product with id '&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$product&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;sd&quot;&gt;/**
-     * @Route(&quot;/&quot;, name=&quot;homepage&quot;)
-     */&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;indexAction&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Request&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$repository&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getDoctrine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getRepository&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Product&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$products&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$repository&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;findAll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-
-        &lt;span class=&quot;c1&quot;&gt;// replace this example code with whatever you need&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;render&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'default/index.html.twig'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-            &lt;span class=&quot;s1&quot;&gt;'products'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$products&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;w&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;gedmo/doctrine-extensions&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;~2.3&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;composer require &quot;gedmo/doctrine-extensions&quot;&lt;/code&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">symfony new symfony3 3.4 php bin/console server:run php bin/console doctrine:database:create</summary></entry><entry><title type="html">Font linking vs Font embedding</title><link href="http://0.0.0.0:4000/posts/font-linking-vs-font-embedding.html" rel="alternate" type="text/html" title="Font linking vs Font embedding" /><published>2019-07-03T00:00:00-05:00</published><updated>2019-07-03T00:00:00-05:00</updated><id>http://0.0.0.0:4000/posts/font-linking-vs-font-embedding</id><content type="html" xml:base="http://0.0.0.0:4000/posts/font-linking-vs-font-embedding.html">&lt;h2 id=&quot;use-font-embedding-not-font-linking&quot;&gt;Use font embedding, not font linking.&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">Symfony3 &amp;amp; Translation</summary></entry><entry><title type="html">Font linking vs Font embedding</title><link href="/posts/font-linking-vs-font-embedding.html" rel="alternate" type="text/html" title="Font linking vs Font embedding" /><published>2019-07-03T00:00:00-05:00</published><updated>2019-07-03T00:00:00-05:00</updated><id>/posts/font-linking-vs-font-embedding</id><content type="html" xml:base="/posts/font-linking-vs-font-embedding.html">&lt;h2 id=&quot;use-font-embedding-not-font-linking&quot;&gt;Use font embedding, not font linking.&lt;/h2&gt;
 
 &lt;p&gt;If you want to use a font on your website you can load it by linking to an external server (using CSS or JavaScript). This is common practice and you will probably know about it if you worked with Google Fonts or Adobe Typekit. This is what we call “font linking”. The alternative is that you host the font yourself and use @font-face in your CSS to load it. You will need to upload the font in several formats to your server. This self-hosted approach is also called “font embedding”.&lt;/p&gt;
 
@@ -348,161 +299,7 @@ php bin/console server:start
   &lt;li&gt;Unzip the files and upload them to your website in the directory “fonts”&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;if you have your own fonts and need them in such a convenient zip file, you may try &lt;a href=&quot;http://www.fontsquirrel.com/tools/webfont-generator&quot;&gt;webfong&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">Use font embedding, not font linking.</summary></entry><entry><title type="html">Creational Design Patterns PHP</title><link href="http://0.0.0.0:4000/posts/creational-design-patterns-php.html" rel="alternate" type="text/html" title="Creational Design Patterns PHP" /><published>2019-07-02T00:00:00-05:00</published><updated>2019-07-02T00:00:00-05:00</updated><id>http://0.0.0.0:4000/posts/creational-design-patterns-php</id><content type="html" xml:base="http://0.0.0.0:4000/posts/creational-design-patterns-php.html">&lt;h1 id=&quot;most-common-design-patterns&quot;&gt;Most Common Design Patterns&lt;/h1&gt;
-
-&lt;p&gt;There are numerous ways to structure the code and project for your web application, and you can put as much or as little thought as you like into architecting.&lt;/p&gt;
-
-&lt;h2 id=&quot;creational&quot;&gt;Creational&lt;/h2&gt;
-
-&lt;p&gt;Creational design patterns are design patterns that deal with object creation mechanisms.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;#abstract-factory&quot;&gt;Abstract Factory&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#static-factory&quot;&gt;Static Factory&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#factory-method&quot;&gt;Factory Method&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;abstract-factory&quot;&gt;Abstract Factory&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Usually the created classes all implement the same interface.&lt;/li&gt;
-  &lt;li&gt;The client does not care about how these objects are created.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Factory&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;createCar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Car&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;// Code for creating a new car&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;// Finally it will return new instance of car&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Car&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;createTruck&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Truck&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;// Code for creating a new truck&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;// Finally it will return new instance of truck&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Truck&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Vehicle&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Car&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Vehicle&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Truck&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Vehicle&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Usage&lt;/p&gt;
-
-&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$factory&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Factory&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
- &lt;span class=&quot;nv&quot;&gt;$car&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$factory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;createCar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
- &lt;span class=&quot;nv&quot;&gt;$truck&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$factory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;createTruck&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;static-factory&quot;&gt;Static Factory&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Usually the created classes all implement the same interface.&lt;/li&gt;
-  &lt;li&gt;The client does not care about how these objects are created.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;em&gt;Uses just one static method to create all types of objects it can create.&lt;/em&gt;&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Factory&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$vehicle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Vehicle&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;// Code for creating a new vehicle&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;// Finally it will return new instance of vechicle&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;// Or throw exception InvalidArgumentException&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$vehicle&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'car'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Car&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$vechile&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'truck'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Truck&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-        &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;\InvalidArgumentException&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Unknown format given'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Vehicle&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Car&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Vehicle&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Truck&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Vehicle&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Usage&lt;/p&gt;
-
-&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;Factory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'car'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;Factory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'truck'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;factory-method&quot;&gt;Factory Method&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Usually the created classes all implement the same interface.&lt;/li&gt;
-  &lt;li&gt;The client does not care about how these objects are created.&lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;&lt;strong&gt;Relies on a subclass to implement different ways to create objects.&lt;/strong&gt;&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;FactoryMethod Depends on abstractions, not concrete classes This is the real trick compared to AbstractFactory or StaticFactory.&lt;/p&gt;
-
-&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Factory&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Vehicle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;CarFactory&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Factory&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Car&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;TruckFactory&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Factory&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Truck&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Vehicle&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Car&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Vehicle&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Truck&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Vehicle&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Usage&lt;/p&gt;
-
-&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$factory&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;CarFactory&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$car&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$factory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">Most Common Design Patterns</summary></entry><entry><title type="html">New PHP 7 Features</title><link href="http://0.0.0.0:4000/posts/new-php7-features.html" rel="alternate" type="text/html" title="New PHP 7 Features" /><published>2019-07-02T00:00:00-05:00</published><updated>2019-07-02T00:00:00-05:00</updated><id>http://0.0.0.0:4000/posts/new-php7-features</id><content type="html" xml:base="http://0.0.0.0:4000/posts/new-php7-features.html">&lt;h2 id=&quot;new-php-7-features&quot;&gt;New PHP 7 features&lt;/h2&gt;
+&lt;p&gt;if you have your own fonts and need them in such a convenient zip file, you may try &lt;a href=&quot;http://www.fontsquirrel.com/tools/webfont-generator&quot;&gt;webfong&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">Use font embedding, not font linking.</summary></entry><entry><title type="html">New PHP 7 Features</title><link href="/posts/new-php7-features.html" rel="alternate" type="text/html" title="New PHP 7 Features" /><published>2019-07-02T00:00:00-05:00</published><updated>2019-07-02T00:00:00-05:00</updated><id>/posts/new-php7-features</id><content type="html" xml:base="/posts/new-php7-features.html">&lt;h2 id=&quot;new-php-7-features&quot;&gt;New PHP 7 features&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;#scalar-type-hints&quot;&gt;Scalar type hints&lt;/a&gt;&lt;/li&gt;
@@ -728,7 +525,161 @@ For example, to create a regular function, you might write something like this:&
 &lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;intdiv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;PHP_EOL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 
 &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">New PHP 7 features</summary></entry><entry><title type="html">Testing Microservices</title><link href="http://0.0.0.0:4000/posts/testing-microservices.html" rel="alternate" type="text/html" title="Testing Microservices" /><published>2019-07-01T00:00:00-05:00</published><updated>2019-07-01T00:00:00-05:00</updated><id>http://0.0.0.0:4000/posts/testing-microservices</id><content type="html" xml:base="http://0.0.0.0:4000/posts/testing-microservices.html">&lt;p&gt;A microservice architecture involves many moving parts with different guarantees
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">New PHP 7 features</summary></entry><entry><title type="html">Creational Design Patterns PHP</title><link href="/posts/creational-design-patterns-php.html" rel="alternate" type="text/html" title="Creational Design Patterns PHP" /><published>2019-07-02T00:00:00-05:00</published><updated>2019-07-02T00:00:00-05:00</updated><id>/posts/creational-design-patterns-php</id><content type="html" xml:base="/posts/creational-design-patterns-php.html">&lt;h1 id=&quot;most-common-design-patterns&quot;&gt;Most Common Design Patterns&lt;/h1&gt;
+
+&lt;p&gt;There are numerous ways to structure the code and project for your web application, and you can put as much or as little thought as you like into architecting.&lt;/p&gt;
+
+&lt;h2 id=&quot;creational&quot;&gt;Creational&lt;/h2&gt;
+
+&lt;p&gt;Creational design patterns are design patterns that deal with object creation mechanisms.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;#abstract-factory&quot;&gt;Abstract Factory&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#static-factory&quot;&gt;Static Factory&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#factory-method&quot;&gt;Factory Method&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;abstract-factory&quot;&gt;Abstract Factory&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Usually the created classes all implement the same interface.&lt;/li&gt;
+  &lt;li&gt;The client does not care about how these objects are created.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Factory&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;createCar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Car&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// Code for creating a new car&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// Finally it will return new instance of car&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Car&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;createTruck&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Truck&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// Code for creating a new truck&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// Finally it will return new instance of truck&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Truck&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Vehicle&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Car&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Vehicle&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Truck&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Vehicle&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Usage&lt;/p&gt;
+
+&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$factory&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Factory&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+ &lt;span class=&quot;nv&quot;&gt;$car&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$factory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;createCar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+ &lt;span class=&quot;nv&quot;&gt;$truck&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$factory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;createTruck&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;static-factory&quot;&gt;Static Factory&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Usually the created classes all implement the same interface.&lt;/li&gt;
+  &lt;li&gt;The client does not care about how these objects are created.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;em&gt;Uses just one static method to create all types of objects it can create.&lt;/em&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Factory&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$vehicle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Vehicle&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// Code for creating a new vehicle&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// Finally it will return new instance of vechicle&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// Or throw exception InvalidArgumentException&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$vehicle&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'car'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Car&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$vechile&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'truck'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Truck&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+        &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;\InvalidArgumentException&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Unknown format given'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Vehicle&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Car&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Vehicle&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Truck&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Vehicle&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Usage&lt;/p&gt;
+
+&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;Factory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'car'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;Factory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'truck'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;factory-method&quot;&gt;Factory Method&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Usually the created classes all implement the same interface.&lt;/li&gt;
+  &lt;li&gt;The client does not care about how these objects are created.&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;&lt;strong&gt;Relies on a subclass to implement different ways to create objects.&lt;/strong&gt;&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;FactoryMethod Depends on abstractions, not concrete classes This is the real trick compared to AbstractFactory or StaticFactory.&lt;/p&gt;
+
+&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Factory&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Vehicle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;CarFactory&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Factory&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Car&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;TruckFactory&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Factory&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Truck&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Vehicle&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Car&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Vehicle&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Truck&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Vehicle&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Usage&lt;/p&gt;
+
+&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$factory&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;CarFactory&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$car&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$factory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">Most Common Design Patterns</summary></entry><entry><title type="html">Testing Microservices</title><link href="/posts/testing-microservices.html" rel="alternate" type="text/html" title="Testing Microservices" /><published>2019-07-01T00:00:00-05:00</published><updated>2019-07-01T00:00:00-05:00</updated><id>/posts/testing-microservices</id><content type="html" xml:base="/posts/testing-microservices.html">&lt;p&gt;A microservice architecture involves many moving parts with different guarantees
 and failure modes, testing these systems is more challenging than testing
 traditional monolithic application. an effective test strategy needs to account
 for testing individual services in isolation and the verification of overall
@@ -863,7 +814,7 @@ way to verify that each piece of code is doing its job correctly, and when it
 doesn’t you will know accurately the reason.&lt;/p&gt;
 
 &lt;p&gt;The combination of different type of test strategies leads to more code coverage
-that help you to find edge cases that we need to handle in our actual code.&lt;/p&gt;</content><author><name></name></author><summary type="html">A microservice architecture involves many moving parts with different guarantees and failure modes, testing these systems is more challenging than testing traditional monolithic application. an effective test strategy needs to account for testing individual services in isolation and the verification of overall system behaviour.</summary></entry><entry><title type="html">Git Hooks</title><link href="http://0.0.0.0:4000/posts/git-hooks-pre-commit.html" rel="alternate" type="text/html" title="Git Hooks" /><published>2019-07-01T00:00:00-05:00</published><updated>2019-07-01T00:00:00-05:00</updated><id>http://0.0.0.0:4000/posts/git-hooks-pre-commit</id><content type="html" xml:base="http://0.0.0.0:4000/posts/git-hooks-pre-commit.html">&lt;h1 id=&quot;git-hooks&quot;&gt;Git Hooks&lt;/h1&gt;
+that help you to find edge cases that we need to handle in our actual code.&lt;/p&gt;</content><author><name></name></author><summary type="html">A microservice architecture involves many moving parts with different guarantees and failure modes, testing these systems is more challenging than testing traditional monolithic application. an effective test strategy needs to account for testing individual services in isolation and the verification of overall system behaviour.</summary></entry><entry><title type="html">Git Hooks</title><link href="/posts/git-hooks-pre-commit.html" rel="alternate" type="text/html" title="Git Hooks" /><published>2019-07-01T00:00:00-05:00</published><updated>2019-07-01T00:00:00-05:00</updated><id>/posts/git-hooks-pre-commit</id><content type="html" xml:base="/posts/git-hooks-pre-commit.html">&lt;h1 id=&quot;git-hooks&quot;&gt;Git Hooks&lt;/h1&gt;
 
 &lt;h3 id=&quot;this-pre-commit-hook-triggers-a-php-codesniffer-validation-on-only-the-added-files-youre-about-to-commit&quot;&gt;This pre-commit hook triggers a PHP CodeSniffer validation on only the Added files you’re about to commit&lt;/h3&gt;
 
@@ -898,7 +849,7 @@ phpcs &lt;span class=&quot;nt&quot;&gt;--standard&lt;/span&gt;&lt;span class=&qu
 fi
 
 &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;exit&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$?&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">Git Hooks</summary></entry><entry><title type="html">Symfony Performance Logger</title><link href="http://0.0.0.0:4000/posts/symfony-performance-logger.html" rel="alternate" type="text/html" title="Symfony Performance Logger" /><published>2019-06-27T00:00:00-05:00</published><updated>2019-06-27T00:00:00-05:00</updated><id>http://0.0.0.0:4000/posts/symfony-performance-logger</id><content type="html" xml:base="http://0.0.0.0:4000/posts/symfony-performance-logger.html">&lt;h3 id=&quot;performance-logger-on-producation-&quot;&gt;Performance Logger ON Producation !&lt;/h3&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">Git Hooks</summary></entry><entry><title type="html">Symfony Performance Logger</title><link href="/posts/symfony-performance-logger.html" rel="alternate" type="text/html" title="Symfony Performance Logger" /><published>2019-06-27T00:00:00-05:00</published><updated>2019-06-27T00:00:00-05:00</updated><id>/posts/symfony-performance-logger</id><content type="html" xml:base="/posts/symfony-performance-logger.html">&lt;h3 id=&quot;performance-logger-on-producation-&quot;&gt;Performance Logger ON Producation !&lt;/h3&gt;
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Doctrine&lt;/code&gt; already ships with an awesome logger. Symfony enables that logger on dev mode the doctrine tab that we see on the profile comes from logger itself Symfony just display it.&lt;/p&gt;
 
@@ -1002,4 +953,72 @@ fi
 
 &lt;p&gt;I’ve made it totally stand alone in order to remove it later as microservice.&lt;/p&gt;
 
-&lt;p&gt;After the next release, we can start to get our hands dirty.&lt;/p&gt;</content><author><name></name></author><summary type="html">Performance Logger ON Producation !</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://user-images.githubusercontent.com/3720473/60279249-fc182000-9900-11e9-871f-f8a8d25e8aa9.png" /></entry></feed>
+&lt;p&gt;After the next release, we can start to get our hands dirty.&lt;/p&gt;</content><author><name></name></author><summary type="html">Performance Logger ON Producation !</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://user-images.githubusercontent.com/3720473/60279249-fc182000-9900-11e9-871f-f8a8d25e8aa9.png" /></entry><entry><title type="html">Sorting Issues</title><link href="/posts/problem-solving.html" rel="alternate" type="text/html" title="Sorting Issues" /><published>2019-06-02T00:00:00-05:00</published><updated>2019-06-02T00:00:00-05:00</updated><id>/posts/problem-solving</id><content type="html" xml:base="/posts/problem-solving.html">&lt;p&gt;As long as this issue one of the highest and oldest one let me describe it in details.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Sorting&lt;/th&gt;
+      &lt;th&gt;View ES&lt;/th&gt;
+      &lt;th&gt;Api ES&lt;/th&gt;
+      &lt;th&gt;View MySql&lt;/th&gt;
+      &lt;th&gt;Api MySql&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Price asc&lt;/td&gt;
+      &lt;td&gt;✓&lt;/td&gt;
+      &lt;td&gt;✓&lt;/td&gt;
+      &lt;td&gt;✓&lt;/td&gt;
+      &lt;td&gt;✓&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Price desc&lt;/td&gt;
+      &lt;td&gt;✓&lt;/td&gt;
+      &lt;td&gt;✗&lt;/td&gt;
+      &lt;td&gt;✓&lt;/td&gt;
+      &lt;td&gt;✓&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Area asc&lt;/td&gt;
+      &lt;td&gt;✓&lt;/td&gt;
+      &lt;td&gt;✓&lt;/td&gt;
+      &lt;td&gt;✓&lt;/td&gt;
+      &lt;td&gt;✓&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Area desc&lt;/td&gt;
+      &lt;td&gt;✓&lt;/td&gt;
+      &lt;td&gt;✗&lt;/td&gt;
+      &lt;td&gt;✓&lt;/td&gt;
+      &lt;td&gt;✓&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;​As we notice issue with &lt;code class=&quot;highlighter-rouge&quot;&gt;desc&lt;/code&gt; something really weird a little bit after digging into code for a good bit of time I catch the error here it is.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;FOS\ElasticaBundle\Subscriber\PaginateElasticaQuerySubscriber@getSortDirection&lt;/code&gt;​&lt;/p&gt;
+
+&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getSortDirection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$sortField&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;array&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$options&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[])&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$dir&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'asc'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$sortDirection&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getRequest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'sortDirectionParameterName'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;empty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$sortDirection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;isset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'defaultSortDirection'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;$sortDirection&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'defaultSortDirection'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;It redefines Sort depending on query string searching for parameter with name as we define in config in or case &lt;code class=&quot;highlighter-rouge&quot;&gt;direction&lt;/code&gt; &lt;strong&gt;api request passes &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;amp;orderDirection=&lt;/code&gt; instead of &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;amp;direction=&lt;/code&gt;&lt;/strong&gt; so it reset direction to the default one &lt;code class=&quot;highlighter-rouge&quot;&gt;asc&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;We could fix that issues simply by just adding parameter with name &lt;code class=&quot;highlighter-rouge&quot;&gt;direction&lt;/code&gt; :)&lt;/p&gt;
+
+&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// VERY IMPORTANT&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;query&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;'direction'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;query&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'orderDirection'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">As long as this issue one of the highest and oldest one let me describe it in details.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/images/posts/api-sorting-issues.png" /></entry></feed>
